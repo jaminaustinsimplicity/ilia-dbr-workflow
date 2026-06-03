@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="build" content="form-modal-badge-2026-06-03"/>
+<meta name="build" content="blockers-col-2026-06-03"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ILIA — DBR MVP Workflow</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
@@ -10,28 +10,29 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height:100vh;padding:28px 20px;}
 .page-title{text-align:center;font-size:22px;font-weight:500;color:#1a1a1a;margin-bottom:4px;}
-.page-sub{text-align:center;font-size:13px;color:#5C6BC0;margin-bottom:32px;}
+.page-sub{text-align:center;font-size:12px;color:#5C6BC0;margin-bottom:28px;}
 
-/* lanes */
-.lane-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;max-width:1020px;margin:0 auto;}
+/* ── 4-col layout ── */
+.lane-wrap{display:grid;grid-template-columns:1fr 1fr 1fr 280px;gap:0;max-width:1200px;margin:0 auto;}
 .lane-hdr{text-align:center;padding:10px 0 11px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;border-radius:8px 8px 0 0;border:1.5px solid;}
 .lh-ilia{background:#E8F0FE;color:#1a56db;border-color:#93C5FD;}
 .lh-ds{background:#E6F9F5;color:#0F7B6C;border-color:#6EE7D0;}
 .lh-client{background:#F3E8FD;color:#7C3AED;border-color:#C4B5FD;}
+.lh-blockers{background:#FEF2F2;color:#991B1B;border-color:#FECACA;}
 
-/* flow */
-.flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;max-width:1020px;margin:0 auto;border:1.5px solid #D1D5DB;border-top:none;border-radius:0 0 8px 8px;background:#fff;}
+.flow{display:grid;grid-template-columns:1fr 1fr 1fr 280px;gap:0;max-width:1200px;margin:0 auto;border:1.5px solid #D1D5DB;border-top:none;border-radius:0 0 8px 8px;background:#fff;}
 .col{display:flex;flex-direction:column;align-items:center;padding:16px 12px;border-right:1px solid #E5E7EB;}
 .col:last-child{border-right:none;}
 .col-ilia{background:#FAFBFF;}.col-ds{background:#F7FFFE;}.col-client{background:#FDFAFF;}
+.col-blockers{background:#FFFAFA;align-items:stretch;padding:16px 10px;}
 
-/* steps */
-.step{width:100%;max-width:230px;border-radius:8px;padding:12px 14px;cursor:pointer;transition:transform .15s,box-shadow .15s;border:1.5px solid;margin:7px 0;}
+/* step cards */
+.step{width:100%;max-width:220px;border-radius:8px;padding:11px 13px;cursor:pointer;transition:transform .15s,box-shadow .15s;border:1.5px solid;margin:7px 0;}
 .step:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.12);}
-.step-num{font-size:10px;font-weight:700;letter-spacing:.5px;margin-bottom:4px;}
-.step-title{font-size:13px;font-weight:500;line-height:1.35;margin-bottom:3px;}
-.step-sub{font-size:11px;line-height:1.3;}
-.hint{font-size:9px;opacity:.5;margin-top:5px;text-transform:uppercase;letter-spacing:.4px;}
+.step-num{font-size:10px;font-weight:700;letter-spacing:.5px;margin-bottom:3px;}
+.step-title{font-size:12px;font-weight:500;line-height:1.35;margin-bottom:2px;}
+.step-sub{font-size:10px;line-height:1.3;}
+.hint{font-size:9px;opacity:.45;margin-top:4px;text-transform:uppercase;letter-spacing:.4px;}
 .s-ilia{background:#EEF4FF;border-color:#93C5FD;color:#1E3A8A;}
 .s-ilia .step-num{color:#3B82F6;}.s-ilia .step-sub{color:#3B6CB0;}.s-ilia:hover{border-color:#3B82F6;background:#E0EEFF;}
 .s-ds{background:#EDFAF6;border-color:#6EE7D0;color:#064E3B;}
@@ -44,11 +45,30 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 .sp{flex-shrink:0;}
 .arr{width:2px;background:#D1D5DB;margin:2px auto;flex-shrink:0;}
 .arr-tip{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #D1D5DB;margin:0 auto;}
-.cross-label{font-size:10px;color:#9CA3AF;text-align:center;margin:4px 0 2px;font-style:italic;}
+.cross-label{font-size:9px;color:#9CA3AF;text-align:center;margin:3px 0 2px;font-style:italic;}
 
-.mvp-bar{max-width:1020px;margin:16px auto 6px;border-top:1.5px dashed #D1D5DB;}
+/* ── Blocker column ── */
+.blockers-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#991B1B;margin-bottom:10px;text-align:center;}
+.blocker-item{border-radius:7px;padding:9px 11px;margin-bottom:8px;cursor:pointer;border:1.5px solid;transition:transform .15s,box-shadow .15s;}
+.blocker-item:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.1);}
+.blocker-num{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.blocker-label{font-size:11px;font-weight:500;line-height:1.35;margin-bottom:3px;}
+.blocker-owner{font-size:10px;display:flex;align-items:center;gap:4px;}
+.owner-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+/* severity colors */
+.bl-critical{background:#FFF1F2;border-color:#FDA4AF;color:#881337;}
+.bl-critical .blocker-num{color:#E11D48;}
+.bl-critical .blocker-owner{color:#9F1239;}
+.bl-high{background:#FFF7ED;border-color:#FDC89A;color:#7C2D12;}
+.bl-high .blocker-num{color:#EA580C;}
+.bl-high .blocker-owner{color:#9A3412;}
+.bl-medium{background:#FEFCE8;border-color:#FDE68A;color:#713F12;}
+.bl-medium .blocker-num{color:#CA8A04;}
+.bl-medium .blocker-owner{color:#854D0E;}
+
+.mvp-bar{max-width:1200px;margin:16px auto 6px;border-top:1.5px dashed #D1D5DB;}
 .mvp-txt{text-align:center;font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:.5px;margin-top:6px;}
-.precond{max-width:1020px;margin:16px auto 0;border:1.5px dashed #D1D5DB;border-radius:8px;padding:12px 18px;font-size:12px;color:#6B7280;text-align:center;line-height:1.7;background:#fff;}
+.precond{max-width:1200px;margin:16px auto 0;border:1.5px dashed #D1D5DB;border-radius:8px;padding:10px 16px;font-size:11px;color:#6B7280;text-align:center;line-height:1.7;background:#fff;}
 .precond strong{color:#374151;}
 
 /* ── STEP MODAL ── */
@@ -63,17 +83,15 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 .m-sys{margin-top:5px;}
 .btn-close{background:#F3F4F6;border:none;color:#6B7280;width:30px;height:30px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:500;}
 .btn-close:hover{background:#E5E7EB;color:#111827;}
-
-/* badge — clickable version */
 .badge{display:inline-flex;align-items:center;gap:4px;border-radius:12px;padding:3px 10px;font-size:11px;font-weight:600;border:1px solid;}
 .badge-blue{background:#EEF4FF;color:#1E3A8A;border-color:#93C5FD;}
 .badge-teal{background:#EDFAF6;color:#064E3B;border-color:#6EE7D0;}
 .badge-purple{background:#F5F0FF;color:#3B0764;border-color:#C4B5FD;}
 .badge-amber{background:#FFFBEB;color:#78350F;border-color:#FCD34D;}
+.badge-red{background:#FFF1F2;color:#881337;border-color:#FDA4AF;}
 .badge-clickable{cursor:pointer;transition:box-shadow .15s,transform .1s;}
 .badge-clickable:hover{box-shadow:0 2px 8px rgba(0,0,0,.15);transform:translateY(-1px);}
 .badge-hint{font-size:9px;color:#059669;margin-left:2px;font-weight:400;}
-
 .divider{border:none;border-top:1px solid #F3F4F6;margin:14px 0;}
 .sect-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#6B7280;margin-bottom:8px;}
 .m-body-text{font-size:13px;color:#374151;line-height:1.7;}
@@ -85,7 +103,28 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 .data-tag .dt-label{font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
 .data-tag .dt-val{font-size:12px;color:#111827;font-weight:500;}
 .blocker-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
-.blocker{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;border-radius:4px;padding:3px 9px;font-size:11px;font-weight:500;}
+.blocker-tag{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B;border-radius:4px;padding:3px 9px;font-size:11px;font-weight:500;}
+
+/* ── BLOCKER MODAL ── */
+.bl-modal-header{border-radius:8px;padding:14px 16px;margin-bottom:16px;}
+.bl-modal-critical{background:#FFF1F2;border:1.5px solid #FDA4AF;}
+.bl-modal-high{background:#FFF7ED;border:1.5px solid #FDC89A;}
+.bl-modal-medium{background:#FEFCE8;border:1.5px solid #FDE68A;}
+.bl-severity{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;}
+.bl-severity.critical{color:#E11D48;}
+.bl-severity.high{color:#EA580C;}
+.bl-severity.medium{color:#CA8A04;}
+.bl-modal-title{font-size:17px;font-weight:500;color:#111827;line-height:1.3;}
+.sme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.sme-card{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:10px 12px;}
+.sme-role{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#9CA3AF;margin-bottom:4px;}
+.sme-name{font-size:13px;font-weight:500;color:#111827;}
+.sme-detail{font-size:11px;color:#6B7280;margin-top:2px;}
+.impact-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.impact-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#374151;line-height:1.5;}
+.impact-dot{width:6px;height:6px;border-radius:50%;background:#E11D48;margin-top:4px;flex-shrink:0;}
+.jira-link{display:inline-flex;align-items:center;gap:5px;background:#EEF4FF;border:1px solid #93C5FD;border-radius:4px;padding:4px 10px;font-size:11px;font-weight:600;color:#1E3A8A;text-decoration:none;margin-top:4px;}
+.jira-link:hover{background:#E0EEFF;}
 
 /* ── FORM MODAL ── */
 .form-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:20px;overflow-y:auto;}
@@ -96,23 +135,17 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 .fm-sub{font-size:11px;opacity:.75;margin-top:2px;}
 .btn-close-white{background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .btn-close-white:hover{background:rgba(255,255,255,.3);}
-
 .form-tabs{display:flex;border-bottom:1.5px solid #E5E7EB;}
 .ftab{flex:1;padding:10px;font-size:12px;font-weight:500;text-align:center;cursor:pointer;background:#F9FAFB;color:#6B7280;border:none;font-family:'Roboto',sans-serif;border-bottom:2.5px solid transparent;transition:all .15s;}
 .ftab.active{background:#fff;color:#059669;border-bottom-color:#059669;}
-
 .form-body{padding:20px;max-height:70vh;overflow-y:auto;}
 .form-page{display:none;}
 .form-page.active{display:block;}
-
-/* actual form replica */
 .dbr-form{font-size:12px;line-height:1.6;color:#1a1a1a;}
 .form-logo{text-align:center;font-size:20px;font-weight:700;margin-bottom:16px;letter-spacing:.5px;}
 .form-logo em{color:#2A62E4;font-style:normal;}
-
 .f-section{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:14px;margin:10px 0;}
 .f-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#6B7280;margin-bottom:10px;}
-
 .field-row{display:flex;align-items:center;gap:6px;margin:6px 0;flex-wrap:wrap;}
 .field-chip{display:inline-flex;align-items:center;gap:4px;border-radius:5px;padding:3px 9px;font-size:11px;font-weight:600;border:1.5px solid;white-space:nowrap;cursor:default;}
 .fc-blue{background:#EEF4FF;color:#1E3A8A;border-color:#3B82F6;}
@@ -122,17 +155,14 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 .fc-teal{background:#EDFAF6;color:#064E3B;border-color:#059669;}
 .fc-purple{background:#F5F0FF;color:#3B0764;border-color:#7C3AED;}
 .src-tag{font-size:9px;font-weight:400;opacity:.7;margin-left:2px;}
-
 .sig-area{margin:8px 0;}
 .sig-line{border-bottom:1.5px solid #374151;height:24px;margin:4px 0 2px;}
 .sig-label{font-size:10px;color:#6B7280;}
 .checkbox-row{display:flex;align-items:flex-start;gap:8px;margin:6px 0;font-size:12px;}
 .cb-box{width:14px;height:14px;border:1.5px solid #374151;border-radius:2px;flex-shrink:0;margin-top:2px;}
-
 .tranche-rule{border-radius:6px;padding:10px 12px;font-size:11px;line-height:1.6;margin:8px 0;}
 .tr-t13{background:#FEF2F2;border:1px solid #FECACA;color:#7F1D1D;}
 .tr-t4{background:#EEF4FF;border:1px solid #93C5FD;color:#1E3A8A;}
-
 .legend-bar{background:#F0F4FF;border:1px solid #C7D7FD;border-radius:8px;padding:12px 14px;margin-top:14px;}
 .legend-bar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#3B52A0;margin-bottom:8px;}
 .legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
@@ -143,22 +173,27 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
 <body>
 
 <div class="page-title">DBR MVP — Interactive Workflow</div>
-<div class="page-sub">Click any step for details · Click the <strong>DocuSign</strong> badge inside Step 3 or 4 to view the DBR form with ILIA field mapping</div>
+<div class="page-sub">Click any step for details · Click the <strong>DocuSign</strong> badge in Steps 3 &amp; 4 to view the mapped DBR form · Click any <strong>Blocker</strong> to see SME owner and impact</div>
 
+<!-- Lane headers -->
 <div class="lane-wrap">
   <div class="lane-hdr lh-ilia">🔵 ILIA (Automated)</div>
   <div class="lane-hdr lh-ds">🟢 DocuSign</div>
   <div class="lane-hdr lh-client">🟣 Client / Settlor</div>
+  <div class="lane-hdr lh-blockers">🚨 Blockers</div>
 </div>
 
+<!-- Flow -->
 <div class="flow">
+
+  <!-- ILIA col -->
   <div class="col col-ilia">
     <div class="step s-ilia" onclick="openModal(1)"><div class="step-num">STEP 1</div><div class="step-title">Identify eligible cases</div><div class="step-sub">Years 11–15 · exclusion check</div><div class="hint">Click to explore →</div></div>
     <div class="arr" style="height:12px;"></div><div class="arr-tip"></div>
     <div class="step s-ilia" onclick="openModal(2)"><div class="step-num">STEP 2</div><div class="step-title">Pre-populate form data</div><div class="step-sub">Policy # · DB · Amount · Dates</div><div class="hint">Click to explore →</div></div>
     <div class="cross-label">triggers DocuSign ↗</div>
-    <div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div>
-    <div class="cross-label">↙ callback from DocuSign</div>
+    <div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div>
+    <div class="cross-label">↙ callback</div>
     <div class="step s-ilia" onclick="openModal(10)"><div class="step-num">STEP 10</div><div class="step-title">Store response in ILIA</div><div class="step-sub">Case record · signed doc</div><div class="hint">Click to explore →</div></div>
     <div class="arr" style="height:12px;"></div><div class="arr-tip"></div>
     <div class="step s-ilia" onclick="openModal(11)"><div class="step-num">STEP 11</div><div class="step-title">Update Tranche view</div><div class="step-sub">DBR status · YES / NO flag</div><div class="hint">Click to explore →</div></div>
@@ -166,20 +201,22 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
     <div class="step s-marissa" onclick="openModal(12)"><div class="step-num">STEP 12</div><div class="step-title">Marissa reviews queue</div><div class="step-sub">Tranche Mgmt · manual action</div><div class="hint">Click to explore →</div></div>
   </div>
 
+  <!-- DocuSign col -->
   <div class="col col-ds">
-    <div class="sp" style="height:148px;"></div>
+    <div class="sp" style="height:140px;"></div>
     <div class="step s-ds" onclick="openModal(3)"><div class="step-num">STEP 3</div><div class="step-title">Generate DocuSign envelope</div><div class="step-sub">Pre-filled · click badge to view form</div><div class="hint">Click to explore →</div></div>
     <div class="arr" style="height:12px;"></div><div class="arr-tip"></div>
     <div class="step s-ds" onclick="openModal(4)"><div class="step-num">STEP 4</div><div class="step-title">Send DBR email notice</div><div class="step-sub">Client + all Settlor signers</div><div class="hint">Click to explore →</div></div>
     <div class="cross-label">email → Client ↗</div>
-    <div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div>
+    <div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div>
     <div class="cross-label">↙ form complete</div>
     <div class="step s-ds" onclick="openModal(9)"><div class="step-num">STEP 9</div><div class="step-title">Capture completion</div><div class="step-sub">Election · signatures · timestamp</div><div class="hint">Click to explore →</div></div>
-    <div class="sp" style="height:380px;"></div>
+    <div class="sp" style="height:370px;"></div>
   </div>
 
+  <!-- Client col -->
   <div class="col col-client">
-    <div class="sp" style="height:148px;"></div><div class="sp" style="height:148px;"></div>
+    <div class="sp" style="height:140px;"></div><div class="sp" style="height:140px;"></div>
     <div class="step s-client" onclick="openModal(5)"><div class="step-num">STEP 5</div><div class="step-title">Client receives notice</div><div class="step-sub">Email w/ DocuSign link</div><div class="hint">Click to explore →</div></div>
     <div class="arr" style="height:12px;"></div><div class="arr-tip"></div>
     <div class="step s-client" onclick="openModal(6)"><div class="step-num">STEP 6</div><div class="step-title">Opens form</div><div class="step-sub">Web or mobile · reviews DBR</div><div class="hint">Click to explore →</div></div>
@@ -187,13 +224,73 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
     <div class="step s-client" onclick="openModal(7)"><div class="step-num">STEP 7</div><div class="step-title">YES / NO election + sign</div><div class="step-sub">eSign via DocuSign</div><div class="hint">Click to explore →</div></div>
     <div class="arr" style="height:12px;"></div><div class="arr-tip"></div>
     <div class="step s-client" onclick="openModal(8)"><div class="step-num">STEP 8</div><div class="step-title">Settlor signs</div><div class="step-sub">Hold Harmless · T4+ via DocuSign</div><div class="hint">Click to explore →</div></div>
-    <div class="sp" style="height:530px;"></div>
+    <div class="sp" style="height:520px;"></div>
   </div>
+
+  <!-- Blockers col -->
+  <div class="col col-blockers">
+    <div class="blockers-title">🚨 Active Blockers</div>
+
+    <div class="blocker-item bl-critical" onclick="openBlocker('b1')">
+      <div class="blocker-num">B1 · Critical · NIWD-1735</div>
+      <div class="blocker-label">Data Quality — DBR values missing in ILIA</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#E11D48;"></span>Kyle &amp; Judy</div>
+    </div>
+
+    <div class="blocker-item bl-critical" onclick="openBlocker('b2')">
+      <div class="blocker-num">B2 · Critical</div>
+      <div class="blocker-label">Exclusion list not provided</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#E11D48;"></span>Marissa Castillo</div>
+    </div>
+
+    <div class="blocker-item bl-critical" onclick="openBlocker('b3')">
+      <div class="blocker-num">B3 · Critical</div>
+      <div class="blocker-label">Settlor Authorized Signer emails not confirmed in ILIA</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#E11D48;"></span>Shounak</div>
+    </div>
+
+    <div class="blocker-item bl-high" onclick="openBlocker('b4')">
+      <div class="blocker-num">B4 · High</div>
+      <div class="blocker-label">Clean DBR form docs not provided for DocuSign build</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Marissa Castillo</div>
+    </div>
+
+    <div class="blocker-item bl-high" onclick="openBlocker('b5')">
+      <div class="blocker-num">B5 · High</div>
+      <div class="blocker-label">Final email copy not approved</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Marissa Castillo</div>
+    </div>
+
+    <div class="blocker-item bl-high" onclick="openBlocker('b6')">
+      <div class="blocker-num">B6 · High</div>
+      <div class="blocker-label">DocuSign API integration method not confirmed</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Dev Team</div>
+    </div>
+
+    <div class="blocker-item bl-high" onclick="openBlocker('b7')">
+      <div class="blocker-num">B7 · High</div>
+      <div class="blocker-label">DocuSign callback / webhook method not confirmed</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Dev Team</div>
+    </div>
+
+    <div class="blocker-item bl-medium" onclick="openBlocker('b8')">
+      <div class="blocker-num">B8 · Medium</div>
+      <div class="blocker-label">DBR formula not confirmed (Surrender Value calc)</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#CA8A04;"></span>Judy</div>
+    </div>
+
+    <div class="blocker-item bl-medium" onclick="openBlocker('b9')">
+      <div class="blocker-num">B9 · Medium</div>
+      <div class="blocker-label">T1–T3 NIW signing sequence not confirmed</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#CA8A04;"></span>Marissa / Operations</div>
+    </div>
+  </div>
+
 </div>
 
 <div class="mvp-bar"></div>
 <div class="mvp-txt">MVP scope ends here — Trustee signing, Bank signing, Carrier submission are post-MVP</div>
-<div class="precond"><strong>Pre-conditions required before build:</strong><br/>Marissa — exclusion list · final email copy · clean DBR form docs &nbsp;|&nbsp; Shounak — field availability report confirming all data fields populated in ILIA</div>
+<div class="precond"><strong>No build work can start until B1–B3 are resolved.</strong> B4–B7 must be resolved before Phase 1 (DocuSign build) can begin.</div>
 
 <!-- STEP MODAL -->
 <div class="overlay" id="overlay" onclick="closeStepModal(event)">
@@ -211,14 +308,27 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
   </div>
 </div>
 
-<!-- FORM MODAL (second layer) -->
+<!-- BLOCKER MODAL -->
+<div class="overlay" id="bl-overlay" onclick="closeBlockerModal(event)">
+  <div class="modal" id="bl-modal">
+    <div class="m-header">
+      <div class="m-icon" id="bl-icon"></div>
+      <div class="m-titles">
+        <div class="m-num" id="bl-num"></div>
+        <div class="m-title" id="bl-title"></div>
+        <div class="m-sys" id="bl-sys"></div>
+      </div>
+      <button class="btn-close" onclick="document.getElementById('bl-overlay').classList.remove('open')">✕</button>
+    </div>
+    <div id="bl-body"></div>
+  </div>
+</div>
+
+<!-- FORM MODAL -->
 <div class="form-overlay" id="form-overlay" onclick="closeFormModal(event)">
   <div class="form-modal">
     <div class="fm-header">
-      <div>
-        <div class="fm-title">📄 DBR Form — ILIA Field Mapping</div>
-        <div class="fm-sub">NIW – DB Reduction Final Revision · Colored fields are pre-populated by ILIA</div>
-      </div>
+      <div><div class="fm-title">📄 DBR Form — ILIA Field Mapping</div><div class="fm-sub">NIW – DB Reduction Final Revision · Colored fields are pre-populated by ILIA</div></div>
       <button class="btn-close-white" onclick="document.getElementById('form-overlay').classList.remove('open')">✕</button>
     </div>
     <div class="form-tabs">
@@ -226,188 +336,94 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
       <button class="ftab" onclick="switchTab(1,this)">Page 2 — Settlor Hold Harmless</button>
     </div>
     <div class="form-body">
-
-      <!-- PAGE 1 -->
       <div class="form-page active" id="fp0">
       <div class="dbr-form">
         <div class="form-logo">NIW <em>Kai·Zen</em></div>
-
         <div class="f-section">
           <div class="f-section-title">Header — pre-populated by ILIA</div>
-          <div class="field-row">
-            <span style="font-weight:500;">Please respond by:</span>
-            <span class="field-chip fc-blue">📅 Deadline Date <span class="src-tag">· Anniversary −30 days</span></span>
-          </div>
-          <div class="field-row">
-            <span style="font-weight:500;">Policy #:</span>
-            <span class="field-chip fc-green">🔢 Policy Number <span class="src-tag">· Case Details</span></span>
-          </div>
+          <div class="field-row"><span style="font-weight:500;">Please respond by:</span><span class="field-chip fc-blue">📅 Deadline Date <span class="src-tag">· Anniversary −30d</span></span></div>
+          <div class="field-row"><span style="font-weight:500;">Policy #:</span><span class="field-chip fc-green">🔢 Policy Number <span class="src-tag">· Case Details</span></span></div>
         </div>
-
-        <div style="font-size:12px;color:#374151;line-height:1.6;margin:8px 0;">
-          <strong>Important notice:</strong> Kai-Zen has now reached its eleventh year and the phase of the design where we focus on helping facilitate the policy's growth potential. The death benefit reduction was part of the original design and is expected to lower the costs associated with your policy up to as much as 50%, depending on your age and health rating.
-        </div>
-
+        <div style="font-size:12px;color:#374151;line-height:1.6;margin:8px 0;"><strong>Important notice:</strong> Kai-Zen has now reached its eleventh year and the phase of the design where we focus on helping facilitate the policy's growth potential...</div>
         <div class="f-section">
           <div class="f-section-title">Death Benefit amounts — pre-populated by ILIA</div>
-          <div class="field-row">
-            <span style="font-size:12px;">The planned death benefit reduction scheduled for year 11 is</span>
-            <span class="field-chip fc-orange">💰 DBR Reduction Amount <span class="src-tag">· Case Details / calc</span></span>
-          </div>
-          <div class="field-row">
-            <span style="font-size:12px;">of the original</span>
-            <span class="field-chip fc-red">📊 Current Death Benefit <span class="src-tag">· Case Details</span></span>
-          </div>
+          <div class="field-row"><span style="font-size:12px;">The planned death benefit reduction for year 11 is</span><span class="field-chip fc-orange">💰 DBR Reduction Amount <span class="src-tag">· Case Details / calc</span></span></div>
+          <div class="field-row"><span style="font-size:12px;">of the original</span><span class="field-chip fc-red">📊 Current Death Benefit <span class="src-tag">· Case Details</span></span></div>
         </div>
-
-        <div style="font-size:12px;color:#374151;line-height:1.6;margin:8px 0;">
-          The intent of the death benefit reduction is to lower the policy cost and allow the cash value more potential for growth over time. You may also choose not to reduce the death benefit.
-        </div>
-
         <div class="f-section">
           <div class="f-section-title">Client election — completed by client via DocuSign</div>
-          <div class="checkbox-row"><div class="cb-box"></div><span>Yes, reduce my death benefit as indicated in red above to enhance my potential cash value growth.</span></div>
+          <div class="checkbox-row"><div class="cb-box"></div><span>Yes, reduce my death benefit as indicated above.</span></div>
           <div class="checkbox-row"><div class="cb-box"></div><span>No, do not reduce my death benefit.</span></div>
           <div class="sig-area" style="margin-top:12px;">
             <div class="field-row"><span style="font-weight:600;font-size:13px;">X</span><span class="field-chip fc-teal">✍️ Insured eSign <span class="src-tag">· DocuSign — Ceremony #1</span></span></div>
-            <div class="sig-line"></div>
-            <div class="sig-label">Insured Signature — captured via DocuSign</div>
+            <div class="sig-line"></div><div class="sig-label">Insured Signature — via DocuSign</div>
           </div>
         </div>
       </div>
       </div>
-
-      <!-- PAGE 2 -->
       <div class="form-page" id="fp1">
       <div class="dbr-form">
-        <div style="font-size:13px;font-weight:700;text-transform:uppercase;border-bottom:2px solid #1a1a1a;padding-bottom:8px;margin-bottom:14px;letter-spacing:.3px;">Hold Harmless &amp; Indemnification as to Provident Trust Group, LLC</div>
-
+        <div style="font-size:13px;font-weight:700;text-transform:uppercase;border-bottom:2px solid #1a1a1a;padding-bottom:8px;margin-bottom:14px;">Hold Harmless &amp; Indemnification as to Provident Trust Group, LLC</div>
         <div class="f-section">
           <div class="f-section-title">Fields pre-populated by ILIA</div>
-          <div class="field-row">
-            <span style="font-size:12px;">Provident Trust Group, LLC, as the trustee of the</span>
-            <span class="field-chip fc-purple">🏛️ Insured Trust Name <span class="src-tag">· Case Details</span></span>
-            <span style="font-size:12px;">Insurance Trust</span>
-          </div>
-          <div class="field-row">
-            <span style="font-size:12px;">has been directed by</span>
-            <span class="field-chip fc-orange">👤 Settlor Name <span class="src-tag">· Settlor Details</span></span>
-            <span style="font-size:12px;">("Settlor") to execute certain documents...</span>
-          </div>
+          <div class="field-row"><span style="font-size:12px;">Provident Trust Group, LLC, as the trustee of the</span><span class="field-chip fc-purple">🏛️ Insured Trust Name <span class="src-tag">· Case Details</span></span></div>
+          <div class="field-row"><span style="font-size:12px;">has been directed by</span><span class="field-chip fc-orange">👤 Settlor Name <span class="src-tag">· Settlor Details</span></span></div>
         </div>
-
-        <div style="font-size:11px;color:#374151;line-height:1.65;margin:10px 0;">
-          ...Settlor acknowledges and confirms, the reduction of the death benefit was contemplated as part of the investment strategy as originally presented to the Settlor. Settlor agrees Provident has not provided education, advice, nor communicated with Settlor regarding the strategy. Provident is not responsible for the determination of the suitability nor effect of the benefit reduction...
-        </div>
-
+        <div style="font-size:11px;color:#374151;line-height:1.65;margin:10px 0;">...Settlor acknowledges the reduction of the death benefit was contemplated as part of the investment strategy as originally presented to the Settlor...</div>
         <div class="f-section">
-          <div class="f-section-title">Tranche routing rule — determines who signs</div>
-          <div class="tranche-rule tr-t13">
-            <strong>T1–T3:</strong> NIW is the Settlor. This section is signed <strong>internally by NIW</strong>. The DocuSign envelope is <strong>not</strong> routed to a Settlor signer for these tranches.
-          </div>
-          <div class="tranche-rule tr-t4" style="margin-top:6px;">
-            <strong>T4 – current:</strong> Individual Settlor. The DocuSign envelope routes to the <strong>Settlor Authorized Signer</strong> for eSign below (Ceremony #2).
-          </div>
+          <div class="f-section-title">Tranche routing rule</div>
+          <div class="tranche-rule tr-t13"><strong>T1–T3:</strong> NIW is the Settlor — signed internally. DocuSign envelope does NOT route to a Settlor signer.</div>
+          <div class="tranche-rule tr-t4" style="margin-top:6px;"><strong>T4+:</strong> Individual Settlor Authorized Signer signs below via DocuSign (Ceremony #2).</div>
         </div>
-
         <div class="f-section">
-          <div class="f-section-title">Settlor signatures — T4+ via DocuSign (Ceremony #2)</div>
-          <div style="margin-bottom:12px;">
-            <div class="field-row"><span style="font-weight:500;">Settlor Signature:</span><span class="field-chip fc-teal">✍️ Settlor eSign <span class="src-tag">· DocuSign — Ceremony #2</span></span></div>
-            <div class="sig-line"></div>
-            <div class="sig-label">Settlor Authorized Signer — captured via DocuSign</div>
-          </div>
-          <div style="margin-bottom:12px;">
-            <div class="field-row"><span style="font-weight:500;">Settlor Printed Name:</span><span class="field-chip fc-orange">👤 Settlor Name <span class="src-tag">· ILIA Settlor record</span></span></div>
-            <div class="sig-line"></div>
-            <div class="sig-label">Pre-populated from ILIA</div>
-          </div>
-          <div>
-            <div class="field-row"><span style="font-weight:500;">Date:</span><span class="field-chip fc-blue">📅 Completion Date <span class="src-tag">· DocuSign captured</span></span></div>
-          </div>
+          <div class="f-section-title">Settlor signatures — T4+ via DocuSign</div>
+          <div style="margin-bottom:12px;"><div class="field-row"><span style="font-weight:500;">Settlor Signature:</span><span class="field-chip fc-teal">✍️ Settlor eSign <span class="src-tag">· DocuSign — Ceremony #2</span></span></div><div class="sig-line"></div><div class="sig-label">Settlor Authorized Signer — via DocuSign</div></div>
+          <div style="margin-bottom:12px;"><div class="field-row"><span style="font-weight:500;">Settlor Printed Name:</span><span class="field-chip fc-orange">👤 Settlor Name <span class="src-tag">· ILIA Settlor record</span></span></div><div class="sig-line"></div></div>
+          <div><div class="field-row"><span style="font-weight:500;">Date:</span><span class="field-chip fc-blue">📅 Completion Date <span class="src-tag">· DocuSign captured</span></span></div></div>
         </div>
       </div>
       </div>
-
-      <!-- LEGEND -->
       <div class="legend-bar">
         <div class="legend-bar-title">Field mapping legend</div>
         <div class="legend-grid">
           <div class="legend-item"><div class="l-dot" style="background:#EEF4FF;border-color:#3B82F6;"></div>Blue — Dates from ILIA</div>
-          <div class="legend-item"><div class="l-dot" style="background:#ECFDF5;border-color:#10B981;"></div>Green — Policy Number from ILIA</div>
-          <div class="legend-item"><div class="l-dot" style="background:#FFF7ED;border-color:#F97316;"></div>Orange — Amounts &amp; Names from ILIA</div>
-          <div class="legend-item"><div class="l-dot" style="background:#FEF2F2;border-color:#EF4444;"></div>Red — Current Death Benefit from ILIA</div>
+          <div class="legend-item"><div class="l-dot" style="background:#ECFDF5;border-color:#10B981;"></div>Green — Policy # from ILIA</div>
+          <div class="legend-item"><div class="l-dot" style="background:#FFF7ED;border-color:#F97316;"></div>Orange — Amounts &amp; Names</div>
+          <div class="legend-item"><div class="l-dot" style="background:#FEF2F2;border-color:#EF4444;"></div>Red — Current Death Benefit</div>
           <div class="legend-item"><div class="l-dot" style="background:#F5F0FF;border-color:#7C3AED;"></div>Purple — Trust Name from ILIA</div>
-          <div class="legend-item"><div class="l-dot" style="background:#EDFAF6;border-color:#059669;"></div>Teal — eSign fields via DocuSign</div>
+          <div class="legend-item"><div class="l-dot" style="background:#EDFAF6;border-color:#059669;"></div>Teal — eSign via DocuSign</div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
 const steps = {
-  1:{icon:'🔍',num:'Step 1',title:'Identify Eligible Cases',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,
-    what:'ILIA runs a scheduled job evaluating all active Kai-Zen cases, identifying policies in Years 11–15 that have not yet completed a DBR for the current year.',
-    reqs:['Policy must be in Year 11, 12, 13, 14, or 15','Policy must not appear on the completed DBR exclusion list','DBR notice must not have already been sent for this policy year','ILIA reads Tranche Number to determine signing path','Scheduled job runs on a defined cadence tied to anniversary dates'],
-    data:[{l:'Policy Year',v:'Case Details'},{l:'Tranche #',v:'Case record'},{l:'Exclusion list',v:'Loaded by Marissa'},{l:'Prior DBR flag',v:'ILIA history'}],
-    blockers:['Marissa to provide completed DBR exclusion list','Confirm scheduled job framework in ILIA']},
-  2:{icon:'📋',num:'Step 2',title:'Pre-Populate Form Data',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,
-    what:'ILIA assembles all required data fields from the case record to pre-populate the DocuSign envelope before triggering its creation.',
-    reqs:['All required merge fields present and populated in ILIA','DBR Reduction Amount calculated or manually entered','Settlor Authorized Signer name and email on file (T4+)','Deadline date = 30 days before anniversary','New Death Benefit = Current DB minus DBR Reduction Amount'],
-    data:[{l:'Policy #',v:'Case Details'},{l:'Current DB',v:'Case Details'},{l:'DBR Amount',v:'Admin / calc'},{l:'New DB',v:'Calculated'},{l:'Deadline Date',v:'Anniversary −30d'},{l:'Settlor email',v:'Settlor record'}],
-    blockers:['Shounak field availability report required','Confirm DBR Amount field in Case Details','Confirm DBR formula with Judy']},
-  3:{icon:'📝',num:'Step 3',title:'Generate DocuSign Envelope',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:true,
-    what:'ILIA triggers DocuSign to create a pre-populated DBR eSign envelope. Click the DocuSign badge above to view the actual DBR form with all ILIA field mappings annotated.',
-    reqs:['DocuSign DBR envelope template must be built (National Life — MVP)','ILIA API triggers DocuSign envelope creation with pre-filled data','Page 1: Client/Insured eSign tab for YES/NO election','T4+: Page 2 Settlor eSign tab for Hold Harmless','T1–T3: Page 2 handled internally by NIW — envelope to Client only'],
-    data:[{l:'Template',v:'NIW DBR — NLG'},{l:'Trigger',v:'ILIA API call'},{l:'Routing',v:'T1–T3 vs T4+'},{l:'Tool',v:'DocuSign'}],
-    blockers:['DocuSign template must be built from clean DBR form docs','Marissa to provide clean unmarked form','Confirm DocuSign API integration method']},
-  4:{icon:'📧',num:'Step 4',title:'Send DBR Email Notice',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:true,
-    what:'DocuSign sends the DBR notice email with Marissa\'s approved copy and a unique DocuSign eSign link. Click the DocuSign badge to view the form recipients will receive.',
-    reqs:['Email sent to Client / Insured (always)','T4+: email also sent to ALL Settlor Authorized Signers','T1–T3: only Client receives email (NIW handles Settlor)','Email uses Marissa\'s approved copy with dynamic merge fields','Respond-by date clearly stated (30 days before anniversary)','ILIA logs: timestamp, recipients, policy reference'],
-    data:[{l:'Recipients',v:'Client + Settlor signers'},{l:'Email copy',v:'Marissa approved'},{l:'eSign link',v:'DocuSign generated'},{l:'Merge fields',v:'Name · Date · Amount'}],
-    blockers:['Marissa to finalize email copy','Confirm From address / sender name','Confirm year reference is dynamic (11–15)']},
-  5:{icon:'📬',num:'Step 5',title:'Client Receives Notice',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,
-    what:'The client receives the DBR notice email with a unique DocuSign link to complete the eSign form on web or mobile.',
-    reqs:['Client email must be current and on file in ILIA','DocuSign link unique per recipient per policy year','Link remains active until respond-by deadline','If no response by deadline ILIA flags case as Overdue'],
-    data:[{l:'Channel',v:'Email'},{l:'Form access',v:'Web + mobile'},{l:'Link expiry',v:'Respond-by date'},{l:'Client email',v:'Case Details'}],
-    blockers:['Client email field must be populated across all active cases']},
-  6:{icon:'📱',num:'Step 6',title:'Client Opens Form',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,
-    what:'The client clicks the DocuSign link and opens the pre-populated DBR form. All fields are already filled — client only needs to elect and sign.',
-    reqs:['Form must be mobile-responsive','All pre-populated fields display correctly','No separate login — DocuSign handles auth via unique link'],
-    data:[{l:'Pre-filled',v:'Policy · DB · Amount · Date'},{l:'Auth',v:'DocuSign unique link'},{l:'Device',v:'Web or mobile'},{l:'Form',v:'DocuSign template'}],
-    blockers:[]},
-  7:{icon:'✍️',num:'Step 7',title:'YES / NO Election + eSign',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,
-    what:'Client selects YES or NO and signs via DocuSign — Signing Ceremony #1.',
-    reqs:['YES or NO required before submission','DocuSign eSign completes Ceremony #1','YES: proceeds to Settlor signing','NO: recorded — re-offered next year up to Year 15','NO at Year 15: DBR window permanently closed'],
-    data:[{l:'Election',v:'YES or NO'},{l:'Ceremony',v:'#1 — Client'},{l:'Tool',v:'DocuSign'},{l:'Timestamp',v:'DocuSign captured'}],
-    blockers:[]},
-  8:{icon:'🤝',num:'Step 8',title:'Settlor Signs Hold Harmless',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,
-    what:'Settlor signs Hold Harmless section — Signing Ceremony #2. Path depends on Tranche Number.',
-    reqs:['Required regardless of YES or NO election','T1–T3: NIW signs internally — not via DocuSign','T4+: Settlor Authorized Signer signs via DocuSign','Entity Settlors: authorized signer email must be in ILIA'],
-    data:[{l:'Ceremony',v:'#2 — Settlor'},{l:'T1–T3',v:'NIW internal'},{l:'T4+ tool',v:'DocuSign'},{l:'Section',v:'Hold Harmless'}],
-    blockers:['T1–T3: confirm NIW signing sequence','T4+: confirm Settlor emails in ILIA (Shounak)']},
-  9:{icon:'✅',num:'Step 9',title:'Capture Completion',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:false,
-    what:'DocuSign captures the completed envelope and notifies ILIA. This is the critical ILIA ↔ DocuSign integration point.',
-    reqs:['DocuSign notifies ILIA when envelope fully completed','Notification method: webhook or polling (TBD with dev)','DocuSign passes back: election, signatures, timestamp','Completed signed PDF retrievable for ILIA storage'],
-    data:[{l:'Election',v:'YES or NO'},{l:'Signatures',v:'Client + Settlor'},{l:'Timestamp',v:'DocuSign time'},{l:'Signed doc',v:'PDF from DocuSign'}],
-    blockers:['Confirm DocuSign webhook / callback mechanism with dev — key integration point']},
-  10:{icon:'💾',num:'Step 10',title:'Store Response in ILIA',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,
-    what:'ILIA receives the DocuSign callback and stores all response data against the case record.',
-    reqs:['Store election (YES/NO) against case and policy year','Store completion timestamp and signature references','Save signed PDF to Case Documents / Renewal folder','Log signing path (T1–T3 NIW or T4+ DocuSign)','Flag DBR as completed for this year to prevent re-send'],
-    data:[{l:'Election',v:'YES / NO'},{l:'Doc location',v:'Case Documents'},{l:'Signing path',v:'T1–T3 or T4+'},{l:'Year flagged',v:'Prevent duplicate'}],
-    blockers:[]},
-  11:{icon:'📊',num:'Step 11',title:'Update Tranche View',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,
-    what:'ILIA updates the Tranche Management Workflow tab DBR status column.',
-    reqs:['Update DBR status in Tranche Management → Workflow tab','Show election: DBR Accepted or Declined','Declined Yrs 11–14: "Declined — Re-offer Yr X+1"','Declined Yr 15: "Declined — Final Year"'],
-    data:[{l:'Status',v:'Accepted / Declined'},{l:'Location',v:'Tranche Mgmt'},{l:'Re-offer',v:'Yrs 11–14 only'},{l:'Final flag',v:'Yr 15 declined'}],
-    blockers:[]},
-  12:{icon:'👤',num:'Step 12',title:'Marissa Reviews Queue',badge:'badge-amber',badgeLabel:'Human Action',showFormBadge:false,
-    what:'Marissa reviews completed DBRs in Tranche Management and takes manual next steps. End of MVP scope.',
-    reqs:['All completed DBRs visible across tranches','Election clearly visible per row','YES: proceed to Trustee → Carrier (post-MVP)','NO Yrs 11–14: auto re-offer at next anniversary','NO Yr 15: case closed'],
-    data:[{l:'View',v:'Tranche Management'},{l:'YES next',v:'Trustee → Carrier'},{l:'NO next',v:'Auto re-offer / close'},{l:'Doc',v:'Signed DocuSign PDF'}],
-    blockers:[]}
+  1:{icon:'🔍',num:'Step 1',title:'Identify Eligible Cases',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,what:'ILIA runs a scheduled job evaluating all active Kai-Zen cases, identifying policies in Years 11–15 that have not yet completed a DBR for the current year.',reqs:['Policy must be in Year 11, 12, 13, 14, or 15','Policy must not appear on the completed DBR exclusion list','DBR notice must not have already been sent for this policy year','ILIA reads Tranche Number to determine signing path','Scheduled job runs on a defined cadence tied to anniversary dates'],data:[{l:'Policy Year',v:'Case Details'},{l:'Tranche #',v:'Case record'},{l:'Exclusion list',v:'Loaded by Marissa'},{l:'Prior DBR flag',v:'ILIA history'}],blockers:['B1 — DBR values missing in ILIA (Kyle/Judy)','B2 — Exclusion list not provided (Marissa)']},
+  2:{icon:'📋',num:'Step 2',title:'Pre-Populate Form Data',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,what:'ILIA assembles all required data fields from the case record to pre-populate the DocuSign envelope before triggering its creation.',reqs:['All required merge fields present and populated in ILIA','DBR Reduction Amount calculated or manually entered','Settlor Authorized Signer name and email on file (T4+)','Deadline date = 30 days before anniversary'],data:[{l:'Policy #',v:'Case Details'},{l:'Current DB',v:'Case Details'},{l:'DBR Amount',v:'Admin / calc'},{l:'Deadline Date',v:'Anniversary −30d'},{l:'Settlor email',v:'Settlor record'}],blockers:['B1 — DBR values missing in ILIA (Kyle/Judy)','B3 — Settlor Authorized Signer emails not confirmed (Shounak)','B8 — DBR formula not confirmed (Judy)']},
+  3:{icon:'📝',num:'Step 3',title:'Generate DocuSign Envelope',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:true,what:'ILIA triggers DocuSign to create a pre-populated DBR eSign envelope. Click the DocuSign badge above to view the actual DBR form with all ILIA field mappings annotated.',reqs:['DocuSign DBR envelope template must be built (National Life — MVP)','ILIA API triggers DocuSign envelope creation with pre-filled data','Page 1: Client/Insured eSign tab for YES/NO election','T4+: Page 2 Settlor eSign tab for Hold Harmless','T1–T3: Page 2 handled internally by NIW'],data:[{l:'Template',v:'NIW DBR — NLG'},{l:'Trigger',v:'ILIA API call'},{l:'Routing',v:'T1–T3 vs T4+'},{l:'Tool',v:'DocuSign'}],blockers:['B4 — Clean DBR form docs needed for DocuSign build (Marissa)','B6 — DocuSign API integration method not confirmed (Dev)']},
+  4:{icon:'📧',num:'Step 4',title:'Send DBR Email Notice',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:true,what:'DocuSign sends the DBR notice email with Marissa\'s approved copy and a unique DocuSign eSign link.',reqs:['Email sent to Client / Insured (always)','T4+: email also sent to ALL Settlor Authorized Signers','T1–T3: only Client receives email (NIW handles Settlor)','Respond-by date clearly stated (30 days before anniversary)'],data:[{l:'Recipients',v:'Client + Settlor signers'},{l:'Email copy',v:'Marissa approved'},{l:'eSign link',v:'DocuSign generated'},{l:'Merge fields',v:'Name · Date · Amount'}],blockers:['B5 — Final email copy not approved (Marissa)','B3 — Settlor Authorized Signer emails not confirmed (Shounak)']},
+  5:{icon:'📬',num:'Step 5',title:'Client Receives Notice',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,what:'The client receives the DBR notice email with a unique DocuSign link.',reqs:['Client email must be current and on file in ILIA','DocuSign link unique per recipient per policy year','Link remains active until respond-by deadline'],data:[{l:'Channel',v:'Email'},{l:'Form access',v:'Web + mobile'},{l:'Link expiry',v:'Respond-by date'},{l:'Client email',v:'Case Details'}],blockers:[]},
+  6:{icon:'📱',num:'Step 6',title:'Client Opens Form',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,what:'The client clicks the DocuSign link and opens the pre-populated DBR form — all fields pre-filled, client only needs to elect and sign.',reqs:['Form must be mobile-responsive','All pre-populated fields display correctly','DocuSign handles auth via unique link'],data:[{l:'Pre-filled',v:'Policy · DB · Amount · Date'},{l:'Auth',v:'DocuSign unique link'},{l:'Device',v:'Web or mobile'}],blockers:[]},
+  7:{icon:'✍️',num:'Step 7',title:'YES / NO Election + eSign',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,what:'Client selects YES or NO and signs via DocuSign — Signing Ceremony #1.',reqs:['YES or NO required before submission','DocuSign eSign completes Ceremony #1','YES: proceeds to Settlor signing','NO: re-offered next year up to Year 15','NO at Year 15: DBR window permanently closed'],data:[{l:'Election',v:'YES or NO'},{l:'Ceremony',v:'#1 — Client'},{l:'Tool',v:'DocuSign'},{l:'Timestamp',v:'DocuSign captured'}],blockers:[]},
+  8:{icon:'🤝',num:'Step 8',title:'Settlor Signs Hold Harmless',badge:'badge-purple',badgeLabel:'Client / Settlor',showFormBadge:false,what:'Settlor signs Hold Harmless — Signing Ceremony #2. Path depends on Tranche Number.',reqs:['Required regardless of YES or NO','T1–T3: NIW signs internally','T4+: Settlor Authorized Signer signs via DocuSign','Entity Settlors: authorized signer email must be in ILIA'],data:[{l:'Ceremony',v:'#2 — Settlor'},{l:'T1–T3',v:'NIW internal'},{l:'T4+ tool',v:'DocuSign'},{l:'Section',v:'Hold Harmless'}],blockers:['B3 — Settlor Authorized Signer emails not confirmed (Shounak)','B9 — T1–T3 NIW signing sequence not confirmed']},
+  9:{icon:'✅',num:'Step 9',title:'Capture Completion',badge:'badge-teal',badgeLabel:'DocuSign',showFormBadge:false,what:'DocuSign captures the completed envelope and notifies ILIA. This is the critical ILIA ↔ DocuSign integration point.',reqs:['DocuSign notifies ILIA when envelope fully completed','Notification method: webhook or polling (TBD)','DocuSign passes back: election, signatures, timestamp','Completed signed PDF retrievable for ILIA storage'],data:[{l:'Election',v:'YES or NO'},{l:'Signatures',v:'Client + Settlor'},{l:'Timestamp',v:'DocuSign time'},{l:'Signed doc',v:'PDF from DocuSign'}],blockers:['B7 — DocuSign callback / webhook method not confirmed (Dev)']},
+  10:{icon:'💾',num:'Step 10',title:'Store Response in ILIA',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,what:'ILIA receives the DocuSign callback and stores all response data against the case record.',reqs:['Store election (YES/NO) against case and policy year','Store completion timestamp and signature references','Save signed PDF to Case Documents / Renewal folder','Log signing path (T1–T3 NIW or T4+ DocuSign)'],data:[{l:'Election',v:'YES / NO'},{l:'Doc location',v:'Case Documents'},{l:'Signing path',v:'T1–T3 or T4+'},{l:'Year flagged',v:'Prevent duplicate'}],blockers:[]},
+  11:{icon:'📊',num:'Step 11',title:'Update Tranche View',badge:'badge-blue',badgeLabel:'ILIA Automated',showFormBadge:false,what:'ILIA updates the Tranche Management Workflow tab DBR status column.',reqs:['Update DBR status in Tranche Management → Workflow tab','Show election result: DBR Accepted or Declined','Declined Yrs 11–14: "Declined — Re-offer Yr X+1"','Declined Yr 15: "Declined — Final Year"'],data:[{l:'Status',v:'Accepted / Declined'},{l:'Location',v:'Tranche Mgmt'},{l:'Re-offer',v:'Yrs 11–14 only'},{l:'Final flag',v:'Yr 15 declined'}],blockers:[]},
+  12:{icon:'👤',num:'Step 12',title:'Marissa Reviews Queue',badge:'badge-amber',badgeLabel:'Human Action',showFormBadge:false,what:'Marissa reviews completed DBRs in Tranche Management. End of MVP scope.',reqs:['All completed DBRs visible across tranches','Election clearly visible per client row','YES: proceed to Trustee → Carrier (post-MVP)','NO Yrs 11–14: ILIA auto re-offers at next anniversary','NO Yr 15: case closed'],data:[{l:'View',v:'Tranche Management'},{l:'YES next',v:'Trustee → Carrier'},{l:'NO next',v:'Auto re-offer / close'},{l:'Doc',v:'Signed DocuSign PDF'}],blockers:[]}
+};
+
+const blockers = {
+  b1:{icon:'🚨',num:'B1 · Critical · NIWD-1735',title:'Data Quality — DBR Values Missing in ILIA',severity:'critical',jira:'https://simplicitygh.atlassian.net/browse/NIWD-1735',jiraKey:'NIWD-1735',what:'A DOMO report (142,240 rows) shows the deathBenefitReduction column is blank or zero for the majority of clients in Years 10–15. ILIA cannot pre-populate the DocuSign envelope or determine eligibility until these values are validated and corrected.',impact:['ILIA cannot calculate DBR eligibility for any client','DocuSign envelope will be generated with blank/incorrect DBR amounts','DBR notice emails will contain incorrect data','The entire DBR MVP build is blocked until this is resolved'],smes:[{role:'Owner — Data Validation',name:'Kyle',detail:'Cross-reference DOMO report against carrier records'},{role:'Owner — Formula Confirmation',name:'Judy',detail:'Confirm values match carrier source of truth and update ILIA'},{role:'Field Availability Report',name:'Shounak',detail:'Confirm deathBenefitReduction populated > $0 for all eligible cases'}]},
+  b2:{icon:'🚫',num:'B2 · Critical',title:'Exclusion List Not Provided',severity:'critical',jira:null,what:'Marissa has not yet provided the list of clients who have already executed a DBR. Without this, ILIA cannot filter out completed cases and may send duplicate DBR notices to clients who have already responded.',impact:['ILIA cannot build the exclusion check logic','Risk of sending notices to clients who already completed a DBR','DBR eligibility job cannot run safely'],smes:[{role:'Owner',name:'Marissa Castillo',detail:'Provide list of all NIW clients who have already executed a DBR'},{role:'Loading into ILIA',name:'Shounak',detail:'Load exclusion list into ILIA once provided by Marissa'}]},
+  b3:{icon:'📧',num:'B3 · Critical',title:'Settlor Authorized Signer Emails Not Confirmed in ILIA',severity:'critical',jira:null,what:'Shounak is running a report to confirm whether Settlor Authorized Signer names and email addresses are populated across all active T4+ Kai-Zen cases in ILIA. If these are missing, DocuSign envelopes cannot route to the correct Settlor signers.',impact:['T4+ DocuSign envelopes cannot be routed to Settlor signers','Hold Harmless section (Ceremony #2) cannot be completed','ILIA will have no email address to send Settlor eSign link to'],smes:[{role:'Owner — Field Report',name:'Shounak',detail:'Confirm authorized signer name + email coverage across active cases'},{role:'Remediation',name:'Operations / Marissa',detail:'Update any cases missing Settlor contact details'}]},
+  b4:{icon:'📄',num:'B4 · High',title:'Clean DBR Form Docs Not Provided for DocuSign Build',severity:'high',jira:null,what:'Marissa needs to provide the clean (unmarked, non-redlined) version of the NIW DB Reduction form. The current version on file has annotation markups. DocuSign cannot build the envelope template from the marked-up version.',impact:['DocuSign envelope template cannot be built','Phase 1 of the build is blocked until clean docs are received'],smes:[{role:'Owner',name:'Marissa Castillo',detail:'Provide clean final version of the NIW DB Reduction form (both pages)'},{role:'DocuSign Template Build',name:'Dev Team',detail:'Awaiting clean docs to begin envelope template creation'}]},
+  b5:{icon:'✉️',num:'B5 · High',title:'Final Email Copy Not Approved',severity:'high',jira:null,what:'Marissa\'s email copy draft exists but several items are still unresolved: the year reference needs to be dynamic (11–15), the sign/scan/return language needs to be replaced with DocuSign eSign language, and the From address/sender name needs to be confirmed.',impact:['DocuSign email template cannot be finalized','Dev cannot map email merge fields until copy is locked','Risk of incorrect year reference in client notices'],smes:[{role:'Owner',name:'Marissa Castillo',detail:'Finalize email copy — confirm year reference (11–15), From address, and eSign language'},{role:'Merge field mapping',name:'Dev Team',detail:'Map finalized copy fields to ILIA data sources'}]},
+  b6:{icon:'🔌',num:'B6 · High',title:'DocuSign API Integration Method Not Confirmed',severity:'high',jira:null,what:'The dev team has not yet confirmed how ILIA will trigger DocuSign envelope creation — whether via an existing API integration, a new DocuSign REST API connection, or another method.',impact:['Cannot estimate dev effort for envelope trigger','Phase 1 build scoping is incomplete','Integration architecture cannot be finalized'],smes:[{role:'Owner',name:'Dev Team',detail:'Confirm DocuSign API approach and any existing integrations in ILIA'},{role:'Stakeholder',name:'Jamin Austin',detail:'Decision needed before sprint planning'}]},
+  b7:{icon:'🔔',num:'B7 · High',title:'DocuSign Completion Callback Method Not Confirmed',severity:'high',jira:null,what:'When a DocuSign envelope is completed (all parties signed), ILIA needs to be notified so it can store the election, signatures, and signed document. The method — webhook, polling, or manual retrieval — has not been confirmed with dev.',impact:['Steps 10 and 11 (store response, update Tranche view) depend on this callback','Cannot design the completion flow until method is confirmed','Risk of manual workaround adding operational overhead for Marissa'],smes:[{role:'Owner',name:'Dev Team',detail:'Confirm DocuSign webhook / callback mechanism and scope integration work'},{role:'Stakeholder',name:'Jamin Austin',detail:'Decision needed before Phase 1 build begins'}]},
+  b8:{icon:'🔢',num:'B8 · Medium',title:'DBR Formula Not Confirmed',severity:'medium',jira:null,what:'The DBR Reduction Amount formula needs to be confirmed with Judy. Current understanding: Reduction Amount = Original Death Benefit − Current Surrender Value. This needs validation against carrier methodology before it is used to pre-populate DocuSign envelopes.',impact:['Incorrect formula would result in wrong amounts shown to clients on the form','Formula drives the deathBenefitReduction field value in ILIA'],smes:[{role:'Owner',name:'Judy',detail:'Confirm DBR formula and validate against carrier source of truth'},{role:'Implementation',name:'Dev Team',detail:'Apply confirmed formula to ILIA calculation logic'}]},
+  b9:{icon:'🤝',num:'B9 · Medium',title:'T1–T3 NIW Signing Sequence Not Confirmed',severity:'medium',jira:null,what:'For T1–T3 tranches, NIW is the corporate Settlor and signs the Hold Harmless section internally. The sequence has not been confirmed — specifically whether NIW signs before or after the client returns their election.',impact:['Impacts the workflow sequencing for T1–T3 cases','DocuSign envelope routing logic depends on whether NIW signs in parallel or sequentially'],smes:[{role:'Owner',name:'Marissa Castillo',detail:'Confirm NIW internal signing sequence for T1–T3 Hold Harmless'},{role:'Operations',name:'NIW Operations',detail:'Document the internal process so dev can build the routing logic'}]}
 };
 
 function openModal(num) {
@@ -415,49 +431,55 @@ function openModal(num) {
   document.getElementById('m-icon').textContent = s.icon;
   document.getElementById('m-num').textContent = s.num;
   document.getElementById('m-title').textContent = s.title;
-
   const badgeHtml = s.showFormBadge
     ? `<span class="badge ${s.badge} badge-clickable" onclick="openFormModal()" title="Click to view DBR form with field mapping">${s.badgeLabel} <span class="badge-hint">↗ view DBR form</span></span>`
     : `<span class="badge ${s.badge}">${s.badgeLabel}</span>`;
   document.getElementById('m-sys').innerHTML = badgeHtml;
-
-  let h = '';
-  h += `<div class="sect-title">What happens here</div><div class="m-body-text">${s.what}</div><div class="divider"></div>`;
+  let h = `<div class="sect-title">What happens here</div><div class="m-body-text">${s.what}</div><div class="divider"></div>`;
   h += `<div class="sect-title">Requirements</div><ul class="req-list">`;
   s.reqs.forEach(r => h += `<li><span class="req-dot"></span>${r}</li>`);
-  h += `</ul><div class="divider"></div>`;
-  h += `<div class="sect-title">Data fields involved</div><div class="data-grid">`;
+  h += `</ul><div class="divider"></div><div class="sect-title">Data fields involved</div><div class="data-grid">`;
   s.data.forEach(d => h += `<div class="data-tag"><div class="dt-label">${d.l}</div><div class="dt-val">${d.v}</div></div>`);
   h += `</div>`;
   if (s.blockers && s.blockers.length) {
-    h += `<div class="divider"></div><div class="sect-title">⚠️ Open blockers</div><div class="blocker-wrap">`;
-    s.blockers.forEach(b => h += `<span class="blocker">${b}</span>`);
+    h += `<div class="divider"></div><div class="sect-title">⚠️ Blockers affecting this step</div><div class="blocker-wrap">`;
+    s.blockers.forEach(b => h += `<span class="blocker-tag">${b}</span>`);
     h += `</div>`;
   }
   document.getElementById('m-body').innerHTML = h;
   document.getElementById('overlay').classList.add('open');
 }
 
+function openBlocker(id) {
+  const b = blockers[id]; if (!b) return;
+  document.getElementById('bl-icon').textContent = b.icon;
+  document.getElementById('bl-num').textContent = b.num;
+  document.getElementById('bl-title').textContent = b.title;
+  document.getElementById('bl-sys').innerHTML = `<span class="badge badge-red">${b.severity.charAt(0).toUpperCase()+b.severity.slice(1)} Blocker</span>${b.jira ? ` <a class="jira-link" href="${b.jira}" target="_blank">🔗 ${b.jiraKey}</a>` : ''}`;
+  let h = `<div class="sect-title">What is this blocker?</div><div class="m-body-text">${b.what}</div><div class="divider"></div>`;
+  h += `<div class="sect-title">Build impact</div><ul class="impact-list">`;
+  b.impact.forEach(i => h += `<li><span class="impact-dot"></span>${i}</li>`);
+  h += `</ul><div class="divider"></div><div class="sect-title">SME — Point of contact</div><div class="sme-grid">`;
+  b.smes.forEach(s => h += `<div class="sme-card"><div class="sme-role">${s.role}</div><div class="sme-name">${s.name}</div><div class="sme-detail">${s.detail}</div></div>`);
+  h += `</div>`;
+  document.getElementById('bl-body').innerHTML = h;
+  document.getElementById('bl-overlay').classList.add('open');
+}
+
 function openFormModal() {
   document.getElementById('form-overlay').classList.add('open');
-  // reset to page 1
   document.querySelectorAll('.ftab').forEach((t,i) => t.classList.toggle('active', i===0));
   document.querySelectorAll('.form-page').forEach((p,i) => p.classList.toggle('active', i===0));
 }
-
-function switchTab(idx, btn) {
+function switchTab(idx,btn) {
   document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.form-page').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('fp' + idx).classList.add('active');
+  document.getElementById('fp'+idx).classList.add('active');
 }
-
-function closeStepModal(e) {
-  if (e.target === document.getElementById('overlay')) document.getElementById('overlay').classList.remove('open');
-}
-function closeFormModal(e) {
-  if (e.target === document.getElementById('form-overlay')) document.getElementById('form-overlay').classList.remove('open');
-}
+function closeStepModal(e) { if(e.target===document.getElementById('overlay')) document.getElementById('overlay').classList.remove('open'); }
+function closeBlockerModal(e) { if(e.target===document.getElementById('bl-overlay')) document.getElementById('bl-overlay').classList.remove('open'); }
+function closeFormModal(e) { if(e.target===document.getElementById('form-overlay')) document.getElementById('form-overlay').classList.remove('open'); }
 </script>
 </body>
 </html>
