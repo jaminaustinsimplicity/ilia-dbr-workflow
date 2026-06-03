@@ -16,7 +16,7 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
 .lanes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:0;max-width:1000px;margin:0 auto;}
 .lane-header{text-align:center;padding:10px 0 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:8px 8px 0 0;}
 .lane-ilia{background:rgba(42,98,228,.25);color:#90CAF9;border:1px solid rgba(42,98,228,.4);border-bottom:none;}
-.lane-ll{background:rgba(20,184,166,.2);color:#80CBC4;border:1px solid rgba(20,184,166,.35);border-bottom:none;}
+.lane-ds{background:rgba(20,184,166,.2);color:#80CBC4;border:1px solid rgba(20,184,166,.35);border-bottom:none;}
 .lane-client{background:rgba(124,58,237,.2);color:#CE93D8;border:1px solid rgba(124,58,237,.35);border-bottom:none;}
 
 /* ── Flow container ── */
@@ -26,7 +26,7 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
 
 /* Lane background stripes */
 .col-ilia{background:rgba(42,98,228,.04);}
-.col-ll{background:rgba(20,184,166,.04);}
+.col-ds{background:rgba(20,184,166,.04);}
 .col-client{background:rgba(124,58,237,.04);}
 
 /* ── Step nodes ── */
@@ -41,9 +41,9 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
 /* ILIA steps — blue */
 .s-ilia{background:rgba(42,98,228,.15);border-color:rgba(42,98,228,.5);color:#e8f0fe;}
 .s-ilia:hover{border-color:#2A62E4;background:rgba(42,98,228,.25);}
-/* LifeLink steps — teal */
-.s-ll{background:rgba(20,184,166,.12);border-color:rgba(20,184,166,.45);color:#e0f7f4;}
-.s-ll:hover{border-color:#14b8a6;background:rgba(20,184,166,.22);}
+/* DocuSign steps — teal */
+.s-ds{background:rgba(20,184,166,.12);border-color:rgba(20,184,166,.45);color:#e0f7f4;}
+.s-ds:hover{border-color:#14b8a6;background:rgba(20,184,166,.22);}
 /* Client steps — purple */
 .s-client{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4);color:#f3e8ff;}
 .s-client:hover{border-color:#7c3aed;background:rgba(124,58,237,.22);}
@@ -108,7 +108,7 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
 <!-- Lane headers -->
 <div class="lanes">
   <div class="lane-header lane-ilia">🔵 ILIA (Automated)</div>
-  <div class="lane-header lane-ll">🟢 LifeLink</div>
+  <div class="lane-header lane-ds">🟢 DocuSign</div>
   <div class="lane-header lane-client">🟣 Client / Settlor</div>
 </div>
 
@@ -166,21 +166,21 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
 
   </div>
 
-  <!-- COL 2: LifeLink -->
-  <div class="col col-ll">
+  <!-- COL 2: DocuSign -->
+  <div class="col col-ds">
 
     <div style="height:160px;"></div>
 
-    <div class="step s-ll" onclick="openModal(3)">
+    <div class="step s-ds" onclick="openModal(3)">
       <div class="step-num">STEP 3</div>
       <div class="step-title">Generate eSign form</div>
-      <div class="step-sub">FormBuilder · pre-filled fields</div>
+      <div class="step-sub">DocuSign · pre-filled fields</div>
       <div class="click-hint">Click to explore →</div>
     </div>
 
     <div style="height:10px;"></div>
 
-    <div class="step s-ll" onclick="openModal(4)">
+    <div class="step s-ds" onclick="openModal(4)">
       <div class="step-num">STEP 4</div>
       <div class="step-title">Send DBR email notice</div>
       <div class="step-sub">Client + all Settlor signers</div>
@@ -192,7 +192,7 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
     <div style="height:160px;"></div>
     <div style="height:160px;"></div>
 
-    <div class="step s-ll" onclick="openModal(9)">
+    <div class="step s-ds" onclick="openModal(9)">
       <div class="step-num">STEP 9</div>
       <div class="step-title">Capture completion</div>
       <div class="step-sub">Election · signatures · timestamp</div>
@@ -229,7 +229,7 @@ body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height
     <div class="step s-client" onclick="openModal(7)">
       <div class="step-num">STEP 7</div>
       <div class="step-title">YES / NO election + sign</div>
-      <div class="step-sub">eSign via LL</div>
+      <div class="step-sub">eSign via DocuSign</div>
       <div class="click-hint">Click to explore →</div>
     </div>
 
@@ -305,7 +305,7 @@ const steps = {
     system: 'System: ILIA — Data assembly',
     badge: 'badge-blue',
     badgeLabel: 'ILIA Automated',
-    what: 'ILIA assembles all required data fields from the case record to pre-populate the LifeLink FormBuilder form before triggering its creation.',
+    what: 'ILIA assembles all required data fields from the case record to pre-populate the DocuSign form before triggering its creation.',
     requirements: [
       'All required merge fields must be present and populated in ILIA',
       'DBR Reduction Amount must be calculated or manually entered',
@@ -327,12 +327,12 @@ const steps = {
     icon: '📝',
     num: 'Step 3',
     title: 'Generate eSign Form',
-    system: 'System: LifeLink FormBuilder',
+    system: 'System: DocuSign',
     badge: 'badge-teal',
-    badgeLabel: 'LifeLink',
-    what: 'ILIA triggers LifeLink FormBuilder to generate a pre-populated DBR eSign form using the data assembled in Step 2. The form is built from the NIW DBR template with all fields pre-filled.',
+    badgeLabel: 'DocuSign',
+    what: 'ILIA triggers DocuSign to generate a pre-populated DBR eSign form using the data assembled in Step 2. The form is built from the NIW DBR template with all fields pre-filled.',
     requirements: [
-      'LifeLink FormBuilder must have the DBR form template built (National Life — MVP)',
+      'DocuSign must have the DBR form template built (National Life — MVP)',
       'ILIA must have an API call to trigger LL form creation with pre-filled data',
       'Form must include: Client/Insured eSign section (YES/NO election)',
       'For T4+ cases: form must include Settlor Hold Harmless eSign section',
@@ -345,16 +345,16 @@ const steps = {
       {label: 'Routing', val: 'T1–T3 vs T4+'},
       {label: 'Form type', val: 'eSign'},
     ],
-    blockers: ['LL FormBuilder DBR template must be built', 'Marissa to provide clean unmarked form docs', 'Confirm LL API integration method']
+    blockers: ['LL DocuSign DBR template must be built', 'Marissa to provide clean unmarked form docs', 'Confirm LL API integration method']
   },
   4: {
     icon: '📧',
     num: 'Step 4',
     title: 'Send DBR Email Notice',
-    system: 'System: LifeLink — Email distribution',
+    system: 'System: DocuSign — Email distribution',
     badge: 'badge-teal',
-    badgeLabel: 'LifeLink',
-    what: 'LifeLink sends the DBR notice email to all required recipients. The email contains Marissa\'s approved copy and a unique LifeLink eSign link for the pre-populated form.',
+    badgeLabel: 'DocuSign',
+    what: 'DocuSign sends the DBR notice email to all required recipients. The email contains Marissa\'s approved copy and a unique DocuSign eSign link for the pre-populated form.',
     requirements: [
       'Email sent to Client / Insured (always)',
       'T4+ cases: email also sent to ALL Settlor Authorized Signers on the case',
@@ -378,7 +378,7 @@ const steps = {
     system: 'Actor: Client / Insured',
     badge: 'badge-purple',
     badgeLabel: 'Client / Settlor',
-    what: 'The client receives the DBR notice email in their inbox. The email explains the DBR opportunity for their current policy year and includes a clickable LifeLink eSign link to complete the form on web or mobile.',
+    what: 'The client receives the DBR notice email in their inbox. The email explains the DBR opportunity for their current policy year and includes a clickable DocuSign eSign link to complete the form on web or mobile.',
     requirements: [
       'Client email address must be current and on file in ILIA',
       'Email must render correctly on mobile (responsive)',
@@ -412,7 +412,7 @@ const steps = {
       {label: 'Pre-filled', val: 'Policy · DB · Amount · Date'},
       {label: 'Auth method', val: 'LL unique token'},
       {label: 'Device', val: 'Web or mobile'},
-      {label: 'Form source', val: 'LL FormBuilder'},
+      {label: 'Form source', val: 'LL DocuSign'},
     ],
     blockers: []
   },
@@ -420,10 +420,10 @@ const steps = {
     icon: '✍️',
     num: 'Step 7',
     title: 'YES / NO Election + eSign',
-    system: 'Actor: Client / Insured — via LifeLink eSign',
+    system: 'Actor: Client / Insured — via DocuSign eSign',
     badge: 'badge-purple',
     badgeLabel: 'Client / Settlor',
-    what: 'The client selects YES or NO to the Death Benefit Reduction for their current policy year, then signs the form via LifeLink eSign. This is Signing Ceremony #1.',
+    what: 'The client selects YES or NO to the Death Benefit Reduction for their current policy year, then signs the form via DocuSign eSign. This is Signing Ceremony #1.',
     requirements: [
       'Client must select YES or NO (required field — cannot submit without selection)',
       'Client must complete eSign (Signing Ceremony #1)',
@@ -435,7 +435,7 @@ const steps = {
     data: [
       {label: 'Election', val: 'YES or NO'},
       {label: 'Ceremony', val: '#1 — Client'},
-      {label: 'Signing tool', val: 'LL eSign'},
+      {label: 'Signing tool', val: 'DocuSign eSign'},
       {label: 'Timestamp', val: 'LL captured'},
     ],
     blockers: []
@@ -450,8 +450,8 @@ const steps = {
     what: 'The Settlor signs the Hold Harmless & Indemnification section. This is Signing Ceremony #2. The signing path depends on the Tranche Number of the case.',
     requirements: [
       'REQUIRED regardless of YES or NO election by client',
-      'T1–T3: NIW is the Settlor — NIW signs internally (not via LL eSign)',
-      'T4+: Individual Settlor Authorized Signer receives eSign link and signs via LL',
+      'T1–T3: NIW is the Settlor — NIW signs internally (not via DocuSign eSign)',
+      'T4+: Individual Settlor Authorized Signer receives eSign link and signs via DocuSign',
       'T4+ entity Settlors: authorized signer name + email must be stored in ILIA',
       'Scenario A (Client = Settlor): same person signs both Ceremony #1 and #2',
       'Scenario B (Separate Settlor): Settlor receives separate eSign routing'
@@ -459,7 +459,7 @@ const steps = {
     data: [
       {label: 'Ceremony', val: '#2 — Settlor'},
       {label: 'T1–T3', val: 'NIW internal'},
-      {label: 'T4+ path', val: 'LL eSign'},
+      {label: 'T4+ path', val: 'DocuSign eSign'},
       {label: 'Section', val: 'Hold Harmless'},
     ],
     blockers: ['T1–T3: confirm NIW signing sequence (before or after client?)', 'T4+: confirm Settlor Authorized Signer emails populated in ILIA (Shounak report)']
@@ -468,10 +468,10 @@ const steps = {
     icon: '✅',
     num: 'Step 9',
     title: 'Capture Completion',
-    system: 'System: LifeLink — Completion callback',
+    system: 'System: DocuSign — Completion callback',
     badge: 'badge-teal',
-    badgeLabel: 'LifeLink',
-    what: 'When all required signatures are complete, LifeLink captures the completed form event and notifies ILIA. This is the critical integration point between LL and ILIA.',
+    badgeLabel: 'DocuSign',
+    what: 'When all required signatures are complete, DocuSign captures the completed form event and notifies ILIA. This is the critical integration point between LL and ILIA.',
     requirements: [
       'LL must notify ILIA when form is fully completed (all parties signed)',
       'Notification method must be confirmed: webhook callback, polling, or manual retrieval',
@@ -494,7 +494,7 @@ const steps = {
     system: 'System: ILIA — Data storage',
     badge: 'badge-blue',
     badgeLabel: 'ILIA Automated',
-    what: 'ILIA receives the completion callback from LifeLink and stores all response data against the case record. The signed document is saved to the client\'s document folder.',
+    what: 'ILIA receives the completion callback from DocuSign and stores all response data against the case record. The signed document is saved to the client\'s document folder.',
     requirements: [
       'Store client election (YES or NO) against the case and policy year',
       'Store completion timestamp',
