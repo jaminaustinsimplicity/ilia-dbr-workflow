@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ILIA — DBR MVP Workflow</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Roboto',sans-serif;background:#0f1117;color:#e8eaf6;min-height:100vh;padding:32px 20px;}
+
+.page-title{text-align:center;font-size:22px;font-weight:500;color:#fff;margin-bottom:6px;}
+.page-sub{text-align:center;font-size:13px;color:#7986CB;margin-bottom:40px;}
+
+/* ── System lanes ── */
+.lanes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:0;max-width:1000px;margin:0 auto;}
+.lane-header{text-align:center;padding:10px 0 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-radius:8px 8px 0 0;}
+.lane-ilia{background:rgba(42,98,228,.25);color:#90CAF9;border:1px solid rgba(42,98,228,.4);border-bottom:none;}
+.lane-ll{background:rgba(20,184,166,.2);color:#80CBC4;border:1px solid rgba(20,184,166,.35);border-bottom:none;}
+.lane-client{background:rgba(124,58,237,.2);color:#CE93D8;border:1px solid rgba(124,58,237,.35);border-bottom:none;}
+
+/* ── Flow container ── */
+.flow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;max-width:1000px;margin:0 auto;border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.06);}
+.col{display:flex;flex-direction:column;align-items:center;padding:0 12px;border-right:1px solid rgba(255,255,255,.06);position:relative;}
+.col:last-child{border-right:none;}
+
+/* Lane background stripes */
+.col-ilia{background:rgba(42,98,228,.04);}
+.col-ll{background:rgba(20,184,166,.04);}
+.col-client{background:rgba(124,58,237,.04);}
+
+/* ── Step nodes ── */
+.step{width:100%;max-width:220px;border-radius:10px;padding:12px 14px;cursor:pointer;transition:transform .15s,box-shadow .2s;border:1.5px solid;position:relative;margin:8px 0;}
+.step:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.4);}
+.step-num{font-size:10px;font-weight:700;opacity:.7;margin-bottom:4px;letter-spacing:.5px;}
+.step-title{font-size:13px;font-weight:500;line-height:1.35;margin-bottom:3px;}
+.step-sub{font-size:11px;opacity:.7;line-height:1.3;}
+.step-icon{position:absolute;top:10px;right:10px;font-size:16px;}
+.click-hint{font-size:9px;opacity:.45;margin-top:5px;text-transform:uppercase;letter-spacing:.4px;}
+
+/* ILIA steps — blue */
+.s-ilia{background:rgba(42,98,228,.15);border-color:rgba(42,98,228,.5);color:#e8f0fe;}
+.s-ilia:hover{border-color:#2A62E4;background:rgba(42,98,228,.25);}
+/* LifeLink steps — teal */
+.s-ll{background:rgba(20,184,166,.12);border-color:rgba(20,184,166,.45);color:#e0f7f4;}
+.s-ll:hover{border-color:#14b8a6;background:rgba(20,184,166,.22);}
+/* Client steps — purple */
+.s-client{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.4);color:#f3e8ff;}
+.s-client:hover{border-color:#7c3aed;background:rgba(124,58,237,.22);}
+/* Marissa — amber */
+.s-marissa{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4);color:#fef3c7;}
+.s-marissa:hover{border-color:#f59e0b;background:rgba(245,158,11,.22);}
+
+/* ── Spacers / arrows between rows ── */
+.arrow-row{display:grid;grid-template-columns:1fr 1fr 1fr;max-width:1000px;margin:0 auto;}
+.arrow-cell{display:flex;flex-direction:column;align-items:center;padding:2px 0;}
+.arr-down{width:2px;height:20px;background:rgba(255,255,255,.15);}
+.arr-tip{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid rgba(255,255,255,.15);}
+/* Horizontal cross-lane arrows */
+.cross{display:flex;align-items:center;justify-content:center;padding:4px 0;font-size:11px;color:rgba(255,255,255,.35);gap:4px;max-width:1000px;margin:0 auto;grid-column:1/-1;}
+.cross-line{flex:1;height:1px;background:rgba(255,255,255,.12);}
+.cross-label{font-size:10px;color:rgba(255,255,255,.35);white-space:nowrap;padding:0 6px;}
+
+/* ── Pre-conditions bar ── */
+.precond{max-width:1000px;margin:24px auto 0;border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:12px 18px;font-size:12px;color:rgba(255,255,255,.45);text-align:center;line-height:1.6;}
+.precond strong{color:rgba(255,255,255,.65);}
+
+/* ── MVP boundary ── */
+.mvp-line{max-width:1000px;margin:20px auto 8px;border-top:1px dashed rgba(255,255,255,.15);text-align:center;}
+.mvp-label{font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.6px;margin-top:6px;}
+
+/* ── MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;}
+.overlay.open{display:flex;}
+.modal{background:#1a1d2e;border:1px solid rgba(255,255,255,.12);border-radius:14px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;padding:24px;}
+.modal-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px;}
+.modal-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.modal-titles{flex:1;}
+.modal-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;opacity:.5;margin-bottom:4px;}
+.modal-title{font-size:17px;font-weight:500;line-height:1.3;}
+.modal-system{font-size:11px;opacity:.5;margin-top:3px;}
+.btn-close{background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.btn-close:hover{background:rgba(255,255,255,.15);color:#fff;}
+
+.modal-section{margin-bottom:16px;}
+.modal-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#7986CB;margin-bottom:8px;}
+.modal-body{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;}
+.req-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.req-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;}
+.req-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#7986CB;margin-top:5px;flex-shrink:0;}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px;}
+.data-tag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px;font-size:11px;color:rgba(255,255,255,.65);}
+.data-tag span{display:block;font-size:9px;color:rgba(255,255,255,.35);margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px;}
+.status-badge{display:inline-flex;align-items:center;gap:5px;border-radius:12px;padding:3px 10px;font-size:11px;font-weight:500;margin-top:2px;}
+.badge-blue{background:rgba(42,98,228,.2);color:#90CAF9;border:1px solid rgba(42,98,228,.3);}
+.badge-teal{background:rgba(20,184,166,.15);color:#80CBC4;border:1px solid rgba(20,184,166,.3);}
+.badge-purple{background:rgba(124,58,237,.15);color:#CE93D8;border:1px solid rgba(124,58,237,.3);}
+.badge-amber{background:rgba(245,158,11,.15);color:#FCD34D;border:1px solid rgba(245,158,11,.3);}
+.divider{border:none;border-top:1px solid rgba(255,255,255,.08);margin:14px 0;}
+.blocker-tag{display:inline-block;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#FCA5A5;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:500;margin-right:4px;margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<div class="page-title">DBR MVP — Interactive Workflow</div>
+<div class="page-sub">Click any step to see requirements, data, and system responsibilities</div>
+
+<!-- Lane headers -->
+<div class="lanes">
+  <div class="lane-header lane-ilia">🔵 ILIA (Automated)</div>
+  <div class="lane-header lane-ll">🟢 LifeLink</div>
+  <div class="lane-header lane-client">🟣 Client / Settlor</div>
+</div>
+
+<!-- Flow grid -->
+<div class="flow">
+
+  <!-- COL 1: ILIA -->
+  <div class="col col-ilia">
+
+    <div class="step s-ilia" onclick="openModal(1)">
+      <div class="step-num">STEP 1</div>
+      <div class="step-title">Identify eligible cases</div>
+      <div class="step-sub">Years 11–15 · exclusion check</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div class="arr-down" style="height:10px;background:transparent;"></div>
+
+    <div class="step s-ilia" onclick="openModal(2)">
+      <div class="step-num">STEP 2</div>
+      <div class="step-title">Pre-populate form data</div>
+      <div class="step-sub">Policy # · DB · Amount · Dates</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+
+    <div class="step s-ilia" onclick="openModal(10)">
+      <div class="step-num">STEP 10</div>
+      <div class="step-title">Store response in ILIA</div>
+      <div class="step-sub">Case record · signed doc</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-ilia" onclick="openModal(11)">
+      <div class="step-num">STEP 11</div>
+      <div class="step-title">Update Tranche view</div>
+      <div class="step-sub">DBR status · YES / NO flag</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-marissa" onclick="openModal(12)">
+      <div class="step-num">STEP 12</div>
+      <div class="step-title">Marissa reviews queue</div>
+      <div class="step-sub">Tranche Mgmt · manual action</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+  </div>
+
+  <!-- COL 2: LifeLink -->
+  <div class="col col-ll">
+
+    <div style="height:160px;"></div>
+
+    <div class="step s-ll" onclick="openModal(3)">
+      <div class="step-num">STEP 3</div>
+      <div class="step-title">Generate eSign form</div>
+      <div class="step-sub">FormBuilder · pre-filled fields</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-ll" onclick="openModal(4)">
+      <div class="step-num">STEP 4</div>
+      <div class="step-title">Send DBR email notice</div>
+      <div class="step-sub">Client + all Settlor signers</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+
+    <div class="step s-ll" onclick="openModal(9)">
+      <div class="step-num">STEP 9</div>
+      <div class="step-title">Capture completion</div>
+      <div class="step-sub">Election · signatures · timestamp</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:390px;"></div>
+  </div>
+
+  <!-- COL 3: Client / Settlor -->
+  <div class="col col-client">
+
+    <div style="height:160px;"></div>
+    <div style="height:160px;"></div>
+
+    <div class="step s-client" onclick="openModal(5)">
+      <div class="step-num">STEP 5</div>
+      <div class="step-title">Client receives notice</div>
+      <div class="step-sub">Email w/ eSign link</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-client" onclick="openModal(6)">
+      <div class="step-num">STEP 6</div>
+      <div class="step-title">Opens form</div>
+      <div class="step-sub">Web or mobile · reviews DBR</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-client" onclick="openModal(7)">
+      <div class="step-num">STEP 7</div>
+      <div class="step-title">YES / NO election + sign</div>
+      <div class="step-sub">eSign via LL</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:10px;"></div>
+
+    <div class="step s-client" onclick="openModal(8)">
+      <div class="step-num">STEP 8</div>
+      <div class="step-title">Settlor signs</div>
+      <div class="step-sub">Hold Harmless section · T4+</div>
+      <div class="click-hint">Click to explore →</div>
+    </div>
+
+    <div style="height:550px;"></div>
+  </div>
+
+</div>
+
+<!-- MVP boundary -->
+<div class="mvp-line" style="max-width:1000px;margin:16px auto 4px;"></div>
+<div class="mvp-label" style="text-align:center;">MVP scope ends here — Trustee signing, Bank signing, Carrier submission are post-MVP</div>
+
+<!-- Pre-conditions -->
+<div class="precond">
+  <strong>Pre-conditions required before build can start:</strong><br/>
+  Marissa — exclusion list of completed DBRs · final email copy · clean DBR form docs &nbsp;|&nbsp; Shounak — field availability report confirming all data fields populated in ILIA
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-icon" id="m-icon"></div>
+      <div class="modal-titles">
+        <div class="modal-num" id="m-num"></div>
+        <div class="modal-title" id="m-title"></div>
+        <div class="modal-system" id="m-system"></div>
+      </div>
+      <button class="btn-close" onclick="document.getElementById('overlay').classList.remove('open')">✕</button>
+    </div>
+    <div id="m-body"></div>
+  </div>
+</div>
+
+<script>
+const steps = {
+  1: {
+    icon: '🔍',
+    num: 'Step 1',
+    title: 'Identify Eligible Cases',
+    system: 'System: ILIA — Automated scheduled job',
+    badge: 'badge-blue',
+    badgeLabel: 'ILIA Automated',
+    what: 'ILIA runs a scheduled job that evaluates all active Kai-Zen cases and identifies which policies are in Years 11–15 and have not yet completed a DBR for the current year.',
+    requirements: [
+      'Policy must be in Year 11, 12, 13, 14, or 15',
+      'Policy must not appear on the exclusion list (clients who already executed a DBR)',
+      'A DBR notice must not have already been sent for this policy year',
+      'ILIA reads Tranche Number to determine Settlor signing path (T1–T3 = NIW, T4+ = Individual Settlor)',
+      'Scheduled job runs on a defined cadence (daily or per anniversary date window)'
+    ],
+    data: [
+      {label: 'Policy Year', val: 'Case Details'},
+      {label: 'Tranche #', val: 'Case record'},
+      {label: 'Exclusion list', val: 'Loaded by Marissa'},
+      {label: 'Prior DBR flag', val: 'ILIA history'},
+    ],
+    blockers: ['Marissa to provide completed DBR exclusion list', 'Confirm scheduled job framework in ILIA']
+  },
+  2: {
+    icon: '📋',
+    num: 'Step 2',
+    title: 'Pre-Populate Form Data',
+    system: 'System: ILIA — Data assembly',
+    badge: 'badge-blue',
+    badgeLabel: 'ILIA Automated',
+    what: 'ILIA assembles all required data fields from the case record to pre-populate the LifeLink FormBuilder form before triggering its creation.',
+    requirements: [
+      'All required merge fields must be present and populated in ILIA',
+      'DBR Reduction Amount must be calculated or manually entered',
+      'Settlor Authorized Signer name and email must be on file (T4+ cases)',
+      'Deadline date must be calculated (30 days before anniversary)',
+      'New Death Benefit calculated as: Current DB minus DBR Reduction Amount'
+    ],
+    data: [
+      {label: 'Policy #', val: 'Case Details'},
+      {label: 'Current DB', val: 'Case Details'},
+      {label: 'DBR Amount', val: 'Admin input / calc'},
+      {label: 'New DB', val: 'Calculated'},
+      {label: 'Deadline Date', val: 'Anniversary − 30d'},
+      {label: 'Settlor email', val: 'Settlor record'},
+    ],
+    blockers: ['Shounak field availability report', 'Confirm DBR Amount field exists in Case Details', 'Confirm formula with Judy']
+  },
+  3: {
+    icon: '📝',
+    num: 'Step 3',
+    title: 'Generate eSign Form',
+    system: 'System: LifeLink FormBuilder',
+    badge: 'badge-teal',
+    badgeLabel: 'LifeLink',
+    what: 'ILIA triggers LifeLink FormBuilder to generate a pre-populated DBR eSign form using the data assembled in Step 2. The form is built from the NIW DBR template with all fields pre-filled.',
+    requirements: [
+      'LifeLink FormBuilder must have the DBR form template built (National Life — MVP)',
+      'ILIA must have an API call to trigger LL form creation with pre-filled data',
+      'Form must include: Client/Insured eSign section (YES/NO election)',
+      'For T4+ cases: form must include Settlor Hold Harmless eSign section',
+      'For T1–T3 cases: Settlor Hold Harmless section is handled internally by NIW',
+      'LL must support conditional routing based on Tranche-based settlor logic'
+    ],
+    data: [
+      {label: 'Template', val: 'NIW DBR — NLG'},
+      {label: 'Trigger', val: 'ILIA API call'},
+      {label: 'Routing', val: 'T1–T3 vs T4+'},
+      {label: 'Form type', val: 'eSign'},
+    ],
+    blockers: ['LL FormBuilder DBR template must be built', 'Marissa to provide clean unmarked form docs', 'Confirm LL API integration method']
+  },
+  4: {
+    icon: '📧',
+    num: 'Step 4',
+    title: 'Send DBR Email Notice',
+    system: 'System: LifeLink — Email distribution',
+    badge: 'badge-teal',
+    badgeLabel: 'LifeLink',
+    what: 'LifeLink sends the DBR notice email to all required recipients. The email contains Marissa\'s approved copy and a unique LifeLink eSign link for the pre-populated form.',
+    requirements: [
+      'Email sent to Client / Insured (always)',
+      'T4+ cases: email also sent to ALL Settlor Authorized Signers on the case',
+      'T1–T3 cases: only Client / Insured receives the email (NIW handles Settlor)',
+      'Email body uses Marissa\'s approved copy with dynamic merge fields populated',
+      'Respond-by date must be clearly stated in the email (30 days before anniversary)',
+      'ILIA logs: timestamp of send, recipients, policy reference'
+    ],
+    data: [
+      {label: 'Recipients', val: 'Client + Settlor signers'},
+      {label: 'Email copy', val: 'Marissa approved'},
+      {label: 'eSign link', val: 'LL generated'},
+      {label: 'Merge fields', val: 'Name · Date · Amount'},
+    ],
+    blockers: ['Marissa to finalize email copy', 'Confirm From address / sender name', 'Confirm year reference is dynamic (11–15)']
+  },
+  5: {
+    icon: '📬',
+    num: 'Step 5',
+    title: 'Client Receives Notice',
+    system: 'Actor: Client / Insured',
+    badge: 'badge-purple',
+    badgeLabel: 'Client / Settlor',
+    what: 'The client receives the DBR notice email in their inbox. The email explains the DBR opportunity for their current policy year and includes a clickable LifeLink eSign link to complete the form on web or mobile.',
+    requirements: [
+      'Client email address must be current and on file in ILIA',
+      'Email must render correctly on mobile (responsive)',
+      'eSign link must be unique per recipient per policy year',
+      'Link must remain active until the respond-by deadline',
+      'If no response by deadline, ILIA flags case as Overdue'
+    ],
+    data: [
+      {label: 'Channel', val: 'Email'},
+      {label: 'Form access', val: 'Web + mobile'},
+      {label: 'Link expiry', val: 'Respond-by date'},
+      {label: 'Client email', val: 'Case Details'},
+    ],
+    blockers: ['Client email field must be populated across all active cases']
+  },
+  6: {
+    icon: '📱',
+    num: 'Step 6',
+    title: 'Client Opens Form',
+    system: 'Actor: Client / Insured',
+    badge: 'badge-purple',
+    badgeLabel: 'Client / Settlor',
+    what: 'The client clicks the eSign link and opens the pre-populated DBR form in their browser on web or mobile. They can review all the pre-filled details before making their election.',
+    requirements: [
+      'Form must be mobile-responsive',
+      'All pre-populated fields must display correctly (Policy #, DB amount, reduction amount, respond-by date)',
+      'Client should be able to review full form before signing',
+      'No login required — link is authenticated via unique LL token'
+    ],
+    data: [
+      {label: 'Pre-filled', val: 'Policy · DB · Amount · Date'},
+      {label: 'Auth method', val: 'LL unique token'},
+      {label: 'Device', val: 'Web or mobile'},
+      {label: 'Form source', val: 'LL FormBuilder'},
+    ],
+    blockers: []
+  },
+  7: {
+    icon: '✍️',
+    num: 'Step 7',
+    title: 'YES / NO Election + eSign',
+    system: 'Actor: Client / Insured — via LifeLink eSign',
+    badge: 'badge-purple',
+    badgeLabel: 'Client / Settlor',
+    what: 'The client selects YES or NO to the Death Benefit Reduction for their current policy year, then signs the form via LifeLink eSign. This is Signing Ceremony #1.',
+    requirements: [
+      'Client must select YES or NO (required field — cannot submit without selection)',
+      'Client must complete eSign (Signing Ceremony #1)',
+      'If YES: DBR election is confirmed — proceeds to Settlor signing',
+      'If NO: election is recorded — client will be re-offered next year (up to Year 15)',
+      'If NO at Year 15: no further re-offers — DBR window permanently closed',
+      'Signed form is timestamped by LL on completion'
+    ],
+    data: [
+      {label: 'Election', val: 'YES or NO'},
+      {label: 'Ceremony', val: '#1 — Client'},
+      {label: 'Signing tool', val: 'LL eSign'},
+      {label: 'Timestamp', val: 'LL captured'},
+    ],
+    blockers: []
+  },
+  8: {
+    icon: '🤝',
+    num: 'Step 8',
+    title: 'Settlor Signs Hold Harmless',
+    system: 'Actor: Settlor / NIW — Signing Ceremony #2',
+    badge: 'badge-purple',
+    badgeLabel: 'Client / Settlor',
+    what: 'The Settlor signs the Hold Harmless & Indemnification section. This is Signing Ceremony #2. The signing path depends on the Tranche Number of the case.',
+    requirements: [
+      'REQUIRED regardless of YES or NO election by client',
+      'T1–T3: NIW is the Settlor — NIW signs internally (not via LL eSign)',
+      'T4+: Individual Settlor Authorized Signer receives eSign link and signs via LL',
+      'T4+ entity Settlors: authorized signer name + email must be stored in ILIA',
+      'Scenario A (Client = Settlor): same person signs both Ceremony #1 and #2',
+      'Scenario B (Separate Settlor): Settlor receives separate eSign routing'
+    ],
+    data: [
+      {label: 'Ceremony', val: '#2 — Settlor'},
+      {label: 'T1–T3', val: 'NIW internal'},
+      {label: 'T4+ path', val: 'LL eSign'},
+      {label: 'Section', val: 'Hold Harmless'},
+    ],
+    blockers: ['T1–T3: confirm NIW signing sequence (before or after client?)', 'T4+: confirm Settlor Authorized Signer emails populated in ILIA (Shounak report)']
+  },
+  9: {
+    icon: '✅',
+    num: 'Step 9',
+    title: 'Capture Completion',
+    system: 'System: LifeLink — Completion callback',
+    badge: 'badge-teal',
+    badgeLabel: 'LifeLink',
+    what: 'When all required signatures are complete, LifeLink captures the completed form event and notifies ILIA. This is the critical integration point between LL and ILIA.',
+    requirements: [
+      'LL must notify ILIA when form is fully completed (all parties signed)',
+      'Notification method must be confirmed: webhook callback, polling, or manual retrieval',
+      'LL must pass back: client election (YES/NO), signature data, completion timestamp',
+      'Completed signed document must be retrievable for storage in ILIA',
+      'ILIA must handle the callback and trigger Steps 10 and 11 automatically'
+    ],
+    data: [
+      {label: 'Election', val: 'YES or NO'},
+      {label: 'Signatures', val: 'Client + Settlor'},
+      {label: 'Timestamp', val: 'LL completion time'},
+      {label: 'Signed doc', val: 'PDF from LL'},
+    ],
+    blockers: ['Confirm LL callback / webhook mechanism with dev — this is the key integration point']
+  },
+  10: {
+    icon: '💾',
+    num: 'Step 10',
+    title: 'Store Response in ILIA',
+    system: 'System: ILIA — Data storage',
+    badge: 'badge-blue',
+    badgeLabel: 'ILIA Automated',
+    what: 'ILIA receives the completion callback from LifeLink and stores all response data against the case record. The signed document is saved to the client\'s document folder.',
+    requirements: [
+      'Store client election (YES or NO) against the case and policy year',
+      'Store completion timestamp',
+      'Store client signature reference',
+      'Store Settlor signature reference (T4+ cases)',
+      'Save signed PDF document to Case Documents / Renewal folder',
+      'Log which signing path was used (T1–T3 NIW or T4+ Individual Settlor)',
+      'Mark DBR notice as completed for this policy year (prevent re-send)'
+    ],
+    data: [
+      {label: 'Election stored', val: 'YES / NO'},
+      {label: 'Doc location', val: 'Case Documents'},
+      {label: 'Signing path', val: 'T1–T3 or T4+'},
+      {label: 'Year flagged', val: 'Prevent duplicate'},
+    ],
+    blockers: []
+  },
+  11: {
+    icon: '📊',
+    num: 'Step 11',
+    title: 'Update Tranche View',
+    system: 'System: ILIA — Admin UI update',
+    badge: 'badge-blue',
+    badgeLabel: 'ILIA Automated',
+    what: 'ILIA updates the Tranche Management Workflow tab to reflect the completed DBR status for the client. Marissa and the admin team can see the election result and status at a glance.',
+    requirements: [
+      'Update DBR status column in Tranche Management → Workflow tab',
+      'Display election result: DBR Accepted (YES) or Declined (NO)',
+      'Show completion date',
+      'If declined and Years 11–14: status shows "Declined — Re-offer Yr [X+1]"',
+      'If declined at Year 15: status shows "Declined — Final Year" (no further action)',
+      'Bulk view must update across all participants in the tranche'
+    ],
+    data: [
+      {label: 'Status', val: 'Accepted / Declined'},
+      {label: 'Location', val: 'Tranche Mgmt tab'},
+      {label: 'Re-offer flag', val: 'Yrs 11–14 only'},
+      {label: 'Final flag', val: 'Yr 15 declined'},
+    ],
+    blockers: []
+  },
+  12: {
+    icon: '👤',
+    num: 'Step 12',
+    title: 'Marissa Reviews Queue',
+    system: 'Actor: Marissa — Manual action',
+    badge: 'badge-amber',
+    badgeLabel: 'Human Action',
+    what: 'Marissa reviews completed DBRs in Tranche Management and takes the appropriate manual next steps depending on the client\'s election. This is the end of the MVP scope.',
+    requirements: [
+      'Marissa can see all completed DBRs across tranches in one view',
+      'Election (YES/NO) clearly visible per client row',
+      'If YES: Marissa proceeds to Trustee routing and Carrier form steps (post-MVP)',
+      'If NO (Yrs 11–14): ILIA will auto re-offer at next anniversary — no action needed',
+      'If NO (Yr 15): case is closed — no further DBR available',
+      'Marissa can access signed form document directly from the row'
+    ],
+    data: [
+      {label: 'View', val: 'Tranche Management'},
+      {label: 'Next step YES', val: 'Trustee → Carrier (post-MVP)'},
+      {label: 'Next step NO', val: 'Auto re-offer or close'},
+      {label: 'Access', val: 'Signed doc link'},
+    ],
+    blockers: []
+  }
+};
+
+function openModal(num) {
+  const s = steps[num];
+  if (!s) return;
+  document.getElementById('m-icon').textContent = s.icon;
+  document.getElementById('m-num').textContent = s.num;
+  document.getElementById('m-title').textContent = s.title;
+  document.getElementById('m-system').innerHTML = `<span class="status-badge ${s.badge}">${s.badgeLabel}</span>`;
+
+  let html = '';
+
+  // What is this step
+  html += `<div class="modal-section">
+    <div class="modal-section-title">What happens here</div>
+    <div class="modal-body">${s.what}</div>
+  </div><hr class="divider"/>`;
+
+  // Requirements
+  html += `<div class="modal-section">
+    <div class="modal-section-title">Requirements</div>
+    <ul class="req-list">`;
+  s.requirements.forEach(r => { html += `<li>${r}</li>`; });
+  html += `</ul></div><hr class="divider"/>`;
+
+  // Data fields
+  html += `<div class="modal-section">
+    <div class="modal-section-title">Data fields involved</div>
+    <div class="data-grid">`;
+  s.data.forEach(d => {
+    html += `<div class="data-tag"><span>${d.label}</span>${d.val}</div>`;
+  });
+  html += `</div></div>`;
+
+  // Blockers
+  if (s.blockers && s.blockers.length > 0) {
+    html += `<hr class="divider"/>
+    <div class="modal-section">
+      <div class="modal-section-title">⚠️ Open blockers</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;">`;
+    s.blockers.forEach(b => { html += `<span class="blocker-tag">${b}</span>`; });
+    html += `</div></div>`;
+  }
+
+  document.getElementById('m-body').innerHTML = html;
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
+</script>
+</body>
+</html>
