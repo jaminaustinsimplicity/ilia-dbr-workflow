@@ -247,7 +247,7 @@ body{font-family:'Roboto',sans-serif;background:#F0F2F8;color:#1a1a1a;min-height
       <div class="blocker-num">B3 · High <span class="bl-count">2 items</span></div>
       <div class="blocker-label">DocuSign Technical Integration</div>
       <div class="blocker-sub">Envelope trigger (API) · completion callback (webhook vs polling)</div>
-      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Dev Team</div>
+      <div class="blocker-owner"><span class="owner-dot" style="background:#EA580C;"></span>Chris Lane (DocuSign SME)</div>
     </div>
   </div>
 
@@ -392,13 +392,13 @@ const blockers = {
     impact:['Eligibility job cannot safely filter out completed cases (duplicate-notice risk)','DocuSign envelope template cannot be built','Email template cannot be finalized or mapped','T1–T3 routing logic cannot be defined'],
     smes:[{role:'Primary Owner',name:'Marissa Castillo',detail:'Exclusion list, clean form, email copy'},{role:'Operations',name:'NIW Operations',detail:'T1–T3 internal signing sequence'},{role:'Loading',name:'Shounak',detail:'Load exclusion list into ILIA once received'}]},
   b3:{icon:'🔌',num:'B3 · High',title:'DocuSign Technical Integration',severity:'high',jira:null,jiraKey:null,
-    what:'The dev team must confirm how ILIA integrates with DocuSign — both the outbound trigger that creates the envelope and the inbound callback that tells ILIA when signing is complete. These decisions define the integration architecture and Phase 1 build scope.',
+    what:'Chris Lane (DocuSign SME) owns the DocuSign implementation for this project and must confirm how ILIA integrates with DocuSign — both the outbound trigger that creates the envelope and the inbound callback that tells ILIA when signing is complete. These decisions define the integration architecture and Phase 1 build scope.',
     items:[
-      {title:'Envelope creation — API integration method',sev:'high',desc:'Confirm how ILIA triggers DocuSign envelope creation: existing integration, new DocuSign REST API connection, or another method. Needed to scope dev effort for Steps 2–3.',owner:'Dev Team'},
-      {title:'Completion callback — webhook vs polling',sev:'high',desc:'Confirm how DocuSign notifies ILIA when an envelope is fully signed, so ILIA can store the election and signed document. Steps 9–11 depend on this.',owner:'Dev Team'}
+      {title:'Envelope creation — API integration method',sev:'high',desc:'Confirm how ILIA triggers DocuSign envelope creation: existing integration, new DocuSign REST API connection, or another method. Needed to scope dev effort for Steps 2–3.',owner:'Chris Lane (DocuSign SME)'},
+      {title:'Completion callback — webhook vs polling',sev:'high',desc:'Confirm how DocuSign notifies ILIA when an envelope is fully signed, so ILIA can store the election and signed document. Steps 9–11 depend on this.',owner:'Chris Lane (DocuSign SME)'}
     ],
     impact:['Cannot estimate dev effort or finalize Phase 1 scope','Steps 3, 9, 10 and 11 all depend on these integration decisions','Risk of a manual workaround adding operational overhead for Marissa'],
-    smes:[{role:'Owner',name:'Dev Team',detail:'Confirm DocuSign API + callback approach'},{role:'Stakeholder',name:'Jamin Austin',detail:'Decision needed before sprint planning'}]}
+    smes:[{role:'DocuSign SME / Owner',name:'Chris Lane',detail:'Owns DocuSign implementation — confirm API trigger + callback approach'},{role:'Stakeholder',name:'Jamin Austin',detail:'Decision needed before sprint planning'}]}
 };
 
 function openModal(num) {
